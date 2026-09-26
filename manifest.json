@@ -1,8 +1,8 @@
 {
-  "name": "MAZANOKE",
-  "short_name": "MAZANOKE",
-  "description": "Privacy-respecting Image Optimizer",
-  "start_url": "/index.html",
+  "name": "Ảnh Gọn — Nén ảnh miễn phí",
+  "short_name": "Ảnh Gọn",
+  "description": "Nén và đổi định dạng ảnh ngay trên thiết bị",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#191919",
   "theme_color": "#191919",
@@ -17,5 +17,8 @@
       "sizes": "512x512",
       "type": "image/png"
     }
-  ]
+  ],
+  "lang": "vi",
+  "id": "/",
+  "scope": "/"
 }

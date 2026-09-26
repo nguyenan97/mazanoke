@@ -1,4 +1,4 @@
-const APP_VERSION = "v1.1.7";
+const APP_VERSION = "v1.1.7-vi.1";
 const CACHE_VERSION = APP_VERSION;
 const CACHE_NAME = `mazanoke-cache-${CACHE_VERSION}`;
 const urlsToCache = [
@@ -7,6 +7,9 @@ const urlsToCache = [
   "/assets/css/fonts.css",
   "/assets/css/variables.css",
   "/assets/css/style.css",
+  "/assets/css/vietnamese.css",
+  "/assets/vendor/utif.js",
+  "/manifest.json",
   "/assets/vendor/browser-image-compression.js",
   "/assets/vendor/heic-to.js",
   "/assets/vendor/libheif.js",
@@ -34,7 +37,7 @@ self.addEventListener("install", (event) => {
 self.addEventListener("fetch", (event) => {
   const requestUrl = new URL(event.request.url);
 
-  if (["chrome-extension:", "file:", "about:"].includes(requestUrl.protocol)) {
+  if (event.request.method !== "GET" || requestUrl.origin !== self.location.origin) {
     return;
   }
 

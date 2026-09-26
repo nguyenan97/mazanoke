@@ -1,16 +1,16 @@
 <!doctype html>
-<html class="animate-0" lang="en">
+<html class="animate-0" lang="vi">
   <head>
     <title>
-      MAZANOKE | Online Image Optimizer That Runs Privately in Your Browser
+      Ảnh Gọn — Nén ảnh, giảm dung lượng JPG, PNG, WebP miễn phí
     </title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="Optimize images locally and privately by converting and compressing them offline in your browser. Supports JPG, PNG, WebP, HEIC, AVIF, GIF, SVG."
+      content="Nén ảnh JPG, PNG, WebP miễn phí. Giảm dung lượng, đổi định dạng HEIC và thay đổi kích thước ngay trên thiết bị, không tải ảnh lên server."
     />
-    <meta name="robots" content="noindex, nofollow" />
+    <meta name="robots" content="index, follow" />
     <script>
       function setTheme(themeName) {
         localStorage.setItem("theme", themeName);
@@ -63,6 +63,8 @@
       href="./assets/images/favicon-16x16.png"
     />
     <link rel="manifest" href="/manifest.json" />
+    <link rel="stylesheet" href="./assets/css/vietnamese.css" />
+    <!-- deployment-meta -->
     <meta name="theme-color" content="#191919" />
   </head>
 
@@ -74,9 +76,9 @@
         <img
           class="logo-image"
           src="./assets/images/symbol-192x192.png"
-          alt="MAZANOKE logo"
+          alt="Biểu tượng MAZANOKE"
         />
-        <h1 class="logo-text">MAZANOKE</h1>
+        <span class="logo-text">Ảnh Gọn</span>
       </div>
 
       <div class="top-nav-actions">
@@ -85,7 +87,7 @@
             <input
               type="checkbox"
               onchange="toggleTheme()"
-              id="themeSwitchThumb"
+              id="themeSwitchThumb" aria-label="Đổi giao diện sáng tối"
             />
             <span class="switch-thumb">
               <span class="switch-icon switch-icon--light">
@@ -142,12 +144,17 @@
               fill="currentColor"
             ></path>
           </svg>
-          <span>Install</span>
+          <span>Cài đặt</span>
         </button>
       </div>
     </nav>
 
-    <div class="content">
+    <main class="content">
+      <header class="intro">
+        <p class="intro-eyebrow">MIỄN PHÍ · XỬ LÝ NGAY TRÊN THIẾT BỊ</p>
+        <h1>Nén ảnh nhẹ hơn.<br>Chia sẻ nhanh hơn.</h1>
+        <p>Giảm dung lượng JPG, PNG, WebP, đổi định dạng và thu nhỏ ảnh.<br>Chọn tùy chỉnh trước, rồi kéo ảnh vào để bắt đầu.</p>
+      </header>
       <div class="drop-zone" id="compressDropZone">
         <div class="drop-zone__border-dashed"></div>
         <div class="drop-zone__cell-grid"></div>
@@ -180,7 +187,7 @@
               </svg>
               <div class="flex flex-col items-center gap-3xs w-100">
                 <div class="drop-zone-content__actions-title">
-                  Drop or paste images
+                  Kéo thả hoặc dán ảnh
                 </div>
                 <div class="drop-zone-content__actions-description">
                   <span>jpg</span>
@@ -210,7 +217,7 @@
                   fill="currentColor"
                 ></path>
               </svg>
-              Browse
+              Chọn ảnh
             </button>
           </div>
 
@@ -226,13 +233,13 @@
                 class="button-cta button-secondary"
                 onclick="abort(event)"
               >
-                Cancel
+                Hủy
               </button>
             </div>
           </div>
 
           <input
-            id="compress"
+            id="compress" aria-label="Chọn ảnh cần nén"
             type="file"
             accept=".svg, .gif, .jpg, .jpeg, .png, .webp, .heic, .heif, .avif, .jxl, .ico, .tiff"
             multiple
@@ -268,7 +275,7 @@
                   fill="currentColor"
                 ></path>
               </svg>
-              Settings
+              Tùy chỉnh
             </div>
             <input
               type="radio"
@@ -301,7 +308,7 @@
                 />
               </svg>
               <span>
-                Images
+                Ảnh đã xử lý
                 <span class="badge">
                   <span id="compressedImageCount" class="badge-text"> 0 </span>
                 </span>
@@ -321,16 +328,16 @@
         <div class="image-subpage">
           <div class="image-options-container" data-elevation="2">
             <div class="image-subpage-title-container">
-              <h2 class="h4">Settings</h2>
+              <h2 class="h4">Tùy chỉnh</h2>
               <div class="image-subpage-title-description">
-                Images are processed locally on your device, ensuring privacy.
+                Ảnh được xử lý ngay trên thiết bị, không tải lên server.
               </div>
             </div>
 
             <div id="compressMethodGroup" class="form-group">
               <div class="form-group__label-content">
                 <label class="form-group__label-text">
-                  Optimization method
+                  Cách nén ảnh
                 </label>
               </div>
               <div class="form-group__input-content">
@@ -342,7 +349,7 @@
                     <div class="button-card-radio__content">
                       <div class="flex gap-sm w-100">
                         <label class="button-card-radio__label"
-                          >Set image quality</label
+                          >Chọn chất lượng</label
                         >
                         <div class="button-card-radio__radio-input">
                           <div class="button-card-radio__radio-icon"></div>
@@ -357,8 +364,7 @@
                       </div>
                       <div class="button-card-radio__description">
                         <div class="button-card-radio__description-text">
-                          Higher values retain more detail, while lower values
-                          result in smaller file sizes.
+                          Chất lượng cao giữ nhiều chi tiết hơn. Giảm chất lượng để ảnh nhẹ hơn.
                         </div>
                       </div>
                     </div>
@@ -370,7 +376,7 @@
                     <div class="button-card-radio__content">
                       <div class="flex gap-sm w-100">
                         <label class="button-card-radio__label"
-                          >Limit file size</label
+                          >Giới hạn dung lượng</label
                         >
                         <div class="button-card-radio__radio-input">
                           <div class="button-card-radio__radio-icon"></div>
@@ -384,7 +390,7 @@
                       </div>
                       <div class="button-card-radio__description">
                         <div class="button-card-radio__description-text">
-                          Try to compress the image to a target file size.
+                          Thử nén ảnh về dung lượng mong muốn.
                         </div>
                       </div>
                     </div>
@@ -401,14 +407,14 @@
               </div>
               <div class="form-group__input-content">
                 <div class="fade-in-up w-100">
-                  <label class="mb-2xs">Quality</label>
+                  <label class="mb-2xs">Chất lượng</label>
                   <div class="flex items-center gap-sm flex-wrap">
                     <div
                       class="form-field-container form-field-container--suffix"
                     >
                       <input
                         type="number"
-                        id="quality"
+                        id="quality" aria-label="Chất lượng ảnh (%)"
                         name="quality"
                         value="80"
                         min="0"
@@ -439,7 +445,7 @@
               </div>
               <div class="form-group__input-content">
                 <div class="fade-in-up w-100">
-                  <label class="mb-2xs">Target file size</label>
+                  <label class="mb-2xs">Dung lượng mong muốn</label>
 
                   <div class="form-field-container">
                     <div class="flex flex-wrap gap-xs w-100">
@@ -449,7 +455,7 @@
                         >
                           <input
                             type="number"
-                            id="limitWeight"
+                            id="limitWeight" aria-label="Dung lượng mong muốn"
                             name="limitWeight"
                             value="2"
                             step="0.1"
@@ -464,7 +470,7 @@
                         </div>
                       </div>
                       <div class="flex-1" style="min-width: 200px">
-                        <select id="limitWeightUnit" class="w-100">
+                        <select id="limitWeightUnit" aria-label="Đơn vị dung lượng" class="w-100">
                           <option value="MB">Megabytes (MB)</option>
                           <option value="KB">Kilobytes (KB)</option>
                         </select>
@@ -478,7 +484,7 @@
             <div class="form-group mt-lg">
               <div class="form-group__label-content">
                 <label class="form-group__label-text" for="limitDimensions">
-                  Dimensions
+                  Kích thước
                 </label>
                 <div class="form-group__description"></div>
               </div>
@@ -491,7 +497,7 @@
                     <div class="button-card-radio__content">
                       <div class="flex gap-sm w-100">
                         <label class="button-card-radio__label"
-                          >Keep original dimensions</label
+                          >Giữ kích thước gốc</label
                         >
                         <div class="button-card-radio__radio-input">
                           <div class="button-card-radio__radio-icon"></div>
@@ -506,7 +512,7 @@
                       </div>
                       <div class="button-card-radio__description">
                         <div class="button-card-radio__description-text">
-                          Do not alter the width and height of the image.
+                          Giữ nguyên chiều rộng và chiều cao của ảnh.
                         </div>
                       </div>
                     </div>
@@ -518,7 +524,7 @@
                     <div class="button-card-radio__content">
                       <div class="flex gap-sm w-100">
                         <label class="button-card-radio__label"
-                          >Limit dimensions</label
+                          >Giới hạn kích thước</label
                         >
                         <div class="button-card-radio__radio-input">
                           <div class="button-card-radio__radio-icon"></div>
@@ -532,7 +538,7 @@
                       </div>
                       <div class="button-card-radio__description">
                         <div class="button-card-radio__description-text">
-                          Limit the width and height of the image.
+                          Giới hạn cạnh dài nhất, giữ nguyên tỷ lệ ảnh.
                         </div>
                       </div>
                     </div>
@@ -549,13 +555,13 @@
               </div>
               <div class="form-group__input-content">
                 <div class="fade-in-up w-100">
-                  <label class="mb-2xs">Limit dimensions</label>
+                  <label class="mb-2xs">Giới hạn kích thước</label>
                   <div
                     class="form-field-container form-field-container--suffix"
                   >
                     <input
                       type="number"
-                      id="limitDimensions"
+                      id="limitDimensions" aria-label="Cạnh dài nhất (px)"
                       name="limitDimensions"
                       value="1200"
                       step="50"
@@ -571,7 +577,7 @@
 
             <div id="formatMethodGroup" class="form-group mt-lg">
               <div class="form-group__label-content">
-                <label class="form-group__label-text"> Convert to </label>
+                <label class="form-group__label-text"> Định dạng đầu ra </label>
               </div>
               <div class="form-group__input-content">
                 <div class="button-card-radio-group">
@@ -581,7 +587,7 @@
                   >
                     <div class="button-card-radio__content">
                       <div class="flex gap-sm w-100">
-                        <label class="button-card-radio__label">Default</label>
+                        <label class="button-card-radio__label">Mặc định</label>
                         <div class="button-card-radio__radio-input">
                           <div class="button-card-radio__radio-icon"></div>
                           <input
@@ -596,7 +602,7 @@
                       <div class="button-card-radio__description">
                         <div class="button-card-radio__description-text">
                           <div class="flex flex-col gap-3xs">
-                            <div>• JPG, PNG, WebP, ICO → Unchanged.</div>
+                            <div>• JPG, PNG, WebP, ICO → Giữ định dạng.</div>
                             <div>• HEIC, AVIF, TIFF, GIF, SVG → PNG.</div>
                           </div>
                         </div>
@@ -622,8 +628,7 @@
                       </div>
                       <div class="button-card-radio__description">
                         <div class="button-card-radio__description-text">
-                          Effective at reducing file size of large photos and
-                          images, with some quality loss.
+                          Phù hợp ảnh chụp, dung lượng nhỏ hơn nhưng có thể mất một phần chi tiết.
                         </div>
                       </div>
                     </div>
@@ -647,8 +652,7 @@
                       </div>
                       <div class="button-card-radio__description">
                         <div class="button-card-radio__description-text">
-                          Preserves image sharpness, colors, and transparency,
-                          but may result in large files.
+                          Phù hợp ảnh cần độ sắc nét và nền trong suốt. File có thể lớn.
                         </div>
                       </div>
                     </div>
@@ -672,8 +676,7 @@
                       </div>
                       <div class="button-card-radio__description">
                         <div class="button-card-radio__description-text">
-                          Retains good details and transparency, may affect
-                          colors slightly at low quality settings.
+                          Phù hợp cho website, hỗ trợ nền trong suốt. Chất lượng thấp có thể làm lệch màu.
                         </div>
                       </div>
                     </div>
@@ -697,8 +700,7 @@
                       </div>
                       <div class="button-card-radio__description">
                         <div class="button-card-radio__description-text">
-                          Mainly used for website favicons and Windows file
-                          icons
+                          Dùng làm favicon cho website và biểu tượng trên Windows.
                         </div>
                       </div>
                     </div>
@@ -717,9 +719,9 @@
             <div class="image-subpage-title-container">
               <div class="image-subpage-title-content">
                 <div class="image-subpage-title__text">
-                  <h2 class="h4">Images</h2>
+                  <h2 class="h4">Ảnh đã xử lý</h2>
                   <div class="image-subpage-title-description">
-                    Optimized images ready for review and download.
+                    Kiểm tra dung lượng, kích thước rồi tải ảnh về máy.
                   </div>
                 </div>
                 <div
@@ -745,7 +747,7 @@
                         fill="currentColor"
                       ></path>
                     </svg>
-                    <span>Delete all</span>
+                    <span>Xóa tất cả</span>
                   </button>
                   <button
                     id="downloadAllImagesButton"
@@ -797,7 +799,7 @@
                         ></path>
                       </svg>
                     </span>
-                    <span>Download all</span>
+                    <span>Tải tất cả</span>
                   </button>
                 </div>
               </div>
@@ -826,10 +828,9 @@
                   ></path>
                 </svg>
                 <div class="flex flex-col gap-2xs">
-                  <h3 class="h5">No image optimized yet</h3>
+                  <h3 class="h5">Chưa có ảnh đã xử lý</h3>
                   <p>
-                    Upload images above to optimize them. Once compressed,
-                    they'll appear here.
+                    Chọn ảnh ở phía trên để bắt đầu. Kết quả sẽ xuất hiện tại đây.
                   </p>
                 </div>
               </div>
@@ -839,10 +840,10 @@
           </div>
         </div>
       </section>
-    </div>
+    </main>
 
     <dialog id="installPWADialog" data-elevation="2">
-      <h2 class="h4">Install MAZANOKE</h2>
+      <h2 class="h4">Cài đặt Ảnh Gọn</h2>
 
       <div class="pl-sm pr-sm mt-md mb-md text-md" style="max-width: 360px">
         <div class="mb-sm">
@@ -861,7 +862,7 @@
                 fill="currentColor"
               ></path>
             </svg>
-            <p>An app shortcut is added to your device.</p>
+            <p>Thêm lối tắt ứng dụng vào thiết bị.</p>
           </div>
         </div>
         <div class="mb-sm">
@@ -880,7 +881,7 @@
                 fill="currentColor"
               ></path>
             </svg>
-            <p>Use even without an internet connection.</p>
+            <p>Dùng offline sau khi ứng dụng đã tải đầy đủ.</p>
           </div>
         </div>
         <div class="mb-sm">
@@ -900,8 +901,7 @@
               ></path>
             </svg>
             <p>
-              Whether on the web or app, your images are always processed
-              privately on-device.
+              Dù dùng website hay ứng dụng, ảnh vẫn được xử lý ngay trên thiết bị.
             </p>
           </div>
         </div>
@@ -912,7 +912,7 @@
           class="button-cta button-secondary minw-auto"
           onclick="installPWADialog.close()"
         >
-          Cancel
+          Hủy
         </button>
         <button id="installPWA" class="button-cta button-primary">
           <svg
@@ -929,32 +929,41 @@
               fill="currentColor"
             ></path>
           </svg>
-          <span>Install</span>
+          <span>Cài đặt</span>
         </button>
       </div>
     </dialog>
 
     <div id="updateToast" class="toast hidden" data-elevation="3">
       <div class="toast-content">
-        <div class="toast-title">Update available</div>
-        <div class="toast-message">Refresh the page to update.</div>
+        <div class="toast-title">Có phiên bản mới</div>
+        <div class="toast-message">Tải lại trang để cập nhật.</div>
       </div>
       <div class="toast-actions">
         <button
           class="button-cta button-secondary minw-auto"
           onclick="updateToast.classList.add('hidden')"
         >
-          Ignore
+          Để sau
         </button>
         <button
           id="updateToastRefreshButton"
           class="button-cta button-secondary minw-auto"
         >
-          Refresh
+          Tải lại
         </button>
       </div>
     </div>
 
+    <section class="guide" aria-labelledby="guide-title">
+      <h2 id="guide-title">Nén ảnh online bằng Ảnh Gọn</h2>
+      <ol><li>Chọn chất lượng hoặc dung lượng mong muốn, ví dụ 200 KB.</li><li>Chọn định dạng và giới hạn kích thước nếu cần.</li><li>Chọn hoặc kéo thả ảnh vào khung. Tải từng ảnh hoặc tải tất cả dưới dạng ZIP.</li></ol>
+      <details><summary>Nên chọn JPG, PNG hay WebP?</summary><p>JPG phù hợp ảnh chụp. PNG phù hợp logo và ảnh cần nền trong suốt, nhưng không phải lúc nào cũng nén nhỏ. WebP thường phù hợp đăng website và vẫn hỗ trợ nền trong suốt. Đổi sang JPG sẽ mất nền trong suốt.</p></details>
+      <details><summary>Có nén ảnh xuống 200 KB được không?</summary><p>Chọn “Giới hạn dung lượng”, nhập 200 và chọn KB trước khi thêm ảnh. Kết quả phụ thuộc ảnh gốc và định dạng; nếu chưa đạt, hãy giảm kích thước hoặc chọn JPG/WebP rồi thử lại.</p></details>
+      <details><summary>Có chuyển HEIC sang JPG được không?</summary><p>Chọn JPG ở “Định dạng đầu ra”, rồi chọn ảnh HEIC từ thiết bị. Bạn có thể xử lý nhiều ảnh trong một lần. Ảnh quá lớn có thể vượt bộ nhớ của điện thoại.</p></details>
+      <details><summary>Ảnh có được lưu trên server không?</summary><p>Không. Việc nén và đổi định dạng diễn ra trong browser. Website không có API nhận ảnh. Tùy chỉnh giao diện được lưu trong browser; bản này chưa tích hợp quảng cáo hay analytics. Dịch vụ hosting vẫn có thể ghi thông tin truy cập kỹ thuật.</p></details>
+      <details><summary>Ảnh sau xử lý có giữ nguyên mọi thứ không?</summary><p>Nén có thể làm mất chi tiết. EXIF bị loại bỏ; GIF động thường thành ảnh tĩnh. Luôn giữ bản gốc và kiểm tra kết quả trước khi sử dụng.</p></details>
+    </section>
     <footer>
       <a
         class="footer-text"
@@ -962,12 +971,14 @@
         target="_blank"
         rel="noopener noreferrer"
       >
-        <span>created by civilblur</span>
+        <span>Phát triển từ MAZANOKE của civilblur</span>
         <!-- app-version-placeholder -->
       </a>
+      <a class="footer-text" href="https://github.com/nguyenan97/mazanoke">Mã nguồn bản Việt hóa</a>
+      <a class="footer-text" href="/LICENSE">GPL-3.0</a>
     </footer>
 
-    <button id="backToTop">
+    <button id="backToTop" aria-label="Về đầu trang">
       <svg
         height="16"
         stroke-linejoin="round"

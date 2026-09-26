@@ -126,6 +126,6 @@ function abort(event) {
   event.stopPropagation();
   if (!state.controller) return;
   resetCompressionState(false, true);
-  state.controller.abort(new Error("Image compression cancelled"));
+  state.controller.abort(new Error("Đã hủy nén ảnh"));
 }
 

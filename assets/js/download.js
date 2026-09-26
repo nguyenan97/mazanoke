@@ -1,7 +1,7 @@
 async function downloadAllImages() {
   const GB = 1024 * 1024 * 1024;
   const chunkSize = 1 * GB;
-  const zipFileName = appendFileNameId("mazanoke-images");
+  const zipFileName = appendFileNameId("anh-gon");
 
   const nameCount = {};
   const getUniqueName = (name) => {

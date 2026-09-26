@@ -1,0 +1,25 @@
+/* Vietnamese edition: system fonts include Vietnamese glyphs without a remote font request. */
+:root { --text-font: system-ui, -apple-system, "Segoe UI", sans-serif; }
+h1, h2, h3, .form-group__label-text, footer a.footer-text { font-family: var(--text-font); }
+body.subpage--output .image-options-container { display: none; }
+body:not(.subpage--output) .image-output-container { display: none; }
+body.subpage--output .image-output-container { position: relative; left: auto; width: 100%; height: auto; min-height: 320px; }
+.image-subpage-container { padding-bottom: 0; }
+.intro { padding: 12px 16px 32px; text-align: center; }
+.intro-eyebrow { font-size: 11px; letter-spacing: .12em; font-weight: 600; opacity: .65; }
+.intro h1 { font-size: clamp(30px, 5vw, 48px); line-height: 1.18; letter-spacing: -.035em; margin: 14px 0; }
+.intro > p:last-child { line-height: 1.7; opacity: .75; font-size: 15px; }
+.guide { max-width: 880px; margin: 48px auto 24px; padding: 0 24px; line-height: 1.8; }
+.guide h2 { font-size: 24px; margin-bottom: 16px; }
+.guide ol { padding-left: 24px; margin-bottom: 24px; }
+.guide details { border-top: 1px solid #8884; padding: 14px 0; }
+.guide summary { cursor: pointer; font-weight: 600; }
+.guide details p { margin-top: 12px; opacity: .8; }
+footer { flex-wrap: wrap; gap: 16px; }
+.button-card-radio__label { line-height: 1.5; }
+@media (max-width: 480px) {
+  .intro { padding: 8px 4px 24px; }
+  .intro > p:last-child { font-size: 14px; }
+  .guide { padding: 0 20px; }
+  .top-nav .logo-text { font-size: 22px; }
+}

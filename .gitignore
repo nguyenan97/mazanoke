@@ -11,3 +11,6 @@ Thumbs.db
 *.secret
 .env
 .mazanoke
+dist/
+.netlify/
+node_modules/
