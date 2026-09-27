@@ -1,103 +1,30 @@
-const APP_VERSION = "v1.1.7-vi.1";
-const CACHE_VERSION = APP_VERSION;
-const CACHE_NAME = `mazanoke-cache-${CACHE_VERSION}`;
-const urlsToCache = [
-  "/",
-  "/index.html",
-  "/assets/css/fonts.css",
-  "/assets/css/variables.css",
-  "/assets/css/style.css",
-  "/assets/css/professional.css",
-  "/assets/js/presets.js",
-  "/assets/fonts/inter/inter-latin-wght-normal.woff2",
-  "/assets/fonts/inter/inter-latin-ext-wght-normal.woff2",
-  "/assets/fonts/inter/inter-vietnamese-wght-normal.woff2",
-  "/assets/vendor/utif.js",
-  "/manifest.json",
-  "/assets/vendor/browser-image-compression.js",
-  "/assets/vendor/heic-to.js",
-  "/assets/vendor/libheif.js",
-  "/assets/vendor/ico.js",
-  "/assets/vendor/jszip.js",
-  "/assets/js/global.js",
-  "/assets/js/utilities.js",
-  "/assets/js/helpers.js",
-  "/assets/js/ui.js",
-  "/assets/js/compression.js",
-  "/assets/js/download.js",
-  "/assets/js/events.js",
-  "/assets/images/android-chrome-192x192.png",
-  "/assets/images/android-chrome-512x512.png",
-  "/assets/images/apple-touch-icon.png",
-  "/assets/images/symbol-192x192.png",
-];
-
-self.addEventListener("install", (event) => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(urlsToCache)),
-  );
+const APP_VERSION = '__VERSION__';
+const CACHE = `anhgon-${APP_VERSION}`;
+const CORE = __CORE__;
+const OFFLINE = __OFFLINE__;
+self.addEventListener('install', event => event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(CORE))));
+self.addEventListener('activate', event => event.waitUntil((async () => {
+  for (const name of await caches.keys()) if ((name.startsWith('anhgon-') || name.startsWith('mazanoke-cache-')) && name !== CACHE) await caches.delete(name);
+  await self.clients.claim();
+})()));
+self.addEventListener('fetch', event => {
+  const url = new URL(event.request.url);
+  if (event.request.method !== 'GET' || url.origin !== self.location.origin) return;
+  if (!(OFFLINE.includes(url.pathname) || url.pathname.startsWith('/assets/app/'))) return;
+  event.respondWith((async () => {
+    const cache = await caches.open(CACHE);
+    if (event.request.mode === 'navigate') {
+      try { const response = await fetch(event.request); if (response.ok) await cache.put(event.request, response.clone()); return response; }
+      catch { return await cache.match(event.request) || new Response('Offline: open a previously saved page.', { status:503, headers:{ 'Content-Type':'text/plain;charset=utf-8' } }); }
+    }
+    const cached = await cache.match(event.request); if (cached) return cached;
+    const response = await fetch(event.request); if (response.ok) await cache.put(event.request, response.clone()); return response;
+  })());
 });
-
-self.addEventListener("fetch", (event) => {
-  const requestUrl = new URL(event.request.url);
-
-  if (event.request.method !== "GET" || requestUrl.origin !== self.location.origin) {
-    return;
-  }
-
-  event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
-      if (cachedResponse) {
-        // Serve cached content
-        fetch(event.request)
-          .then((networkResponse) => {
-            if (networkResponse && networkResponse.ok) {
-              caches.open(CACHE_NAME).then((cache) => {
-                cache.put(event.request, networkResponse);
-              });
-            }
-          })
-          .catch(() => {});
-        return cachedResponse;
-      }
-
-      // If cache does not exist, fetch from network
-      return fetch(event.request).then((networkResponse) => {
-        if (!networkResponse || !networkResponse.ok) {
-          return networkResponse;
-        }
-        const responseToCache = networkResponse.clone();
-        caches.open(CACHE_NAME).then((cache) => {
-          cache.put(event.request, responseToCache);
-        });
-        return networkResponse;
-      });
-    }),
-  );
-});
-
-self.addEventListener("activate", (event) => {
-  event.waitUntil(
-    caches
-      .keys()
-      .then((cacheNames) => {
-        return Promise.all(
-          cacheNames.map((cacheName) => {
-            if (
-              cacheName.startsWith("mazanoke-cache-") &&
-              cacheName !== CACHE_NAME
-            ) {
-              return caches.delete(cacheName);
-            }
-          }),
-        );
-      })
-      .then(() => self.clients.claim()),
-  );
-});
-
-self.addEventListener("message", (event) => {
-  if (event.data === "SKIP_WAITING") {
-    self.skipWaiting();
-  }
+self.addEventListener('message', event => {
+  if (event.data === 'SKIP_WAITING') self.skipWaiting();
+  if (event.data === 'CACHE_OFFLINE') event.waitUntil((async () => {
+    try { const cache = await caches.open(CACHE); for (const url of OFFLINE) if (!await cache.match(url)) await cache.add(url); event.ports[0]?.postMessage({ ok:true }); }
+    catch { event.ports[0]?.postMessage({ ok:false }); }
+  })());
 });

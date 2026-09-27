@@ -1,9 +1,8 @@
-# Basic compose file for deploying MAZANOKE
-
+# Build this fork locally. No registry subscription or API service is needed.
 services:
-  mazanoke:
-    container_name: mazanoke
-    image: ghcr.io/civilblur/mazanoke:latest
+  anhgon:
+    build:
+      context: .
     ports:
       - "3474:80"
     restart: unless-stopped

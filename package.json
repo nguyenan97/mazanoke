@@ -1,0 +1,13 @@
+{
+  "name": "anhgon",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build-netlify.mjs",
+    "start": "node scripts/serve.mjs",
+    "test": "node --test tests"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

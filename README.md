@@ -1,101 +1,43 @@
-> **Bản tiếng Việt — Ảnh Gọn:** [Deploy lên Netlify Free](docs/NETLIFY-VI.md) · [Định hướng sản phẩm, thiết kế và SEO](docs/PRODUCT-PLAN.md). Fork từ MAZANOKE, xử lý ảnh ngay trên thiết bị. Thông tin upstream bên dưới.
+# Ảnh Gọn / AnhGon
 
-<h1 align="center">
-  <img src=".github/images/mazanoke-app-icon.png" alt="mazanoke icon" width="120">
+Free Vietnamese and English image tools. Compress, convert and resize batches in your browser; images stay on your device.
 
-MAZANOKE
+[Tiếng Việt](https://anh-gon-vn.netlify.app/) · [English](https://anh-gon-vn.netlify.app/en/) · [Free growth plan](docs/SEO-GROWTH-PLAN.md) · [Deployment](docs/NETLIFY-VI.md)
 
-</h1>
-
-<h2 align="center"> A self-hosted local image optimizer that runs in your browser.</h2>
-
-<center>
-   <img src=".github/images/v1.1.5/featured-desktop-solo-dark.jpg" alt="mazanoke desktop screen capture dark mode" width="1200">
-</center>
-
-## About
-
-MAZANOKE is a simple image optimizer that runs in your browser, works offline, and keeps your images private without ever leaving your device.
-
-Created for everyday people and designed to be shared with family and friends, it serves as an alternative to questionable "free" online tools.
-
-## Table of Content
-
-- [Features](#features)
-- [Install](#install)
-- [Screenshots](#screenshots)
-- [Attributions](#attributions)
+This GPL-3.0 fork is built from [MAZANOKE by civilblur](https://github.com/civilblur/mazanoke). Upstream credits and third-party notices are preserved in [ATTRIBUTIONS](docs/ATTRIBUTIONS.md).
 
 ## Features
 
-- 🖼️ **Optimize Images in Your Browser**
-  - Adjust image quality
-  - Set target file size
-  - Set max width/height
-  - Paste images from clipboard
-  - Convert between and to `JPG`, `PNG`, `WebP`, `ICO`
-  - Convert from `HEIC`, `AVIF`, `TIFF`, `GIF`, `SVG`
-- 🔒 **Privacy-Focused**
-  - Works offline
-  - On-device image processing
-  - Removes EXIF data (location, date, etc.)
-  - No tracking
-  - Installable web app ([learn more](./docs/install-web-app.md))
+- JPG, PNG and WebP compression, file-size targets, proportional resize.
+- HEIC/HEIF and TIFF decoding; browser-supported AVIF/GIF/SVG/ICO input; JPG/PNG/WebP/ICO output.
+- Five task pages in each language, including 200 KB, HEIC→JPG and WebP→JPG.
+- Batch results, individual downloads, ZIP with collision-safe filenames, cancellation and per-file errors.
+- Light/dark themes, local sample image, drag/drop, paste, optional offline download.
+- Static HTML for search engines, canonical/hreflang, sitemap, real 404 and noindex previews.
+- No image upload API, accounts, analytics, ads, database or paid service dependency.
 
-## Install
+JPG uses a white background; EXIF is removed and animated inputs become still images. Results may exceed a target or become larger than the input. Limits: 50 files/batch, 50 MB/file, 40 megapixels decoded, 100 MB retained results, 75 MB ZIP input. Browser/device memory can impose lower practical limits.
 
-### Docker
+## Development
 
-1. Using [Docker Compose](https://docs.docker.com/compose/):
-   ```yaml
-   services:
-     mazanoke:
-       container_name: mazanoke
-       image: ghcr.io/civilblur/mazanoke:latest
-       ports:
-         - "3474:80"
-       restart: unless-stopped
-   ```
-   Available environmental variables: [Configuration](./docs/configuration.md)
-1. Access the app at `http://localhost:3474`
+Node.js 20+; no npm runtime dependencies required.
 
-### Local
+```sh
+npm test
+npm run build
+npm start
+```
 
-1. Download the [latest source code release](https://github.com/civilblur/mazanoke/releases).
-1. Open the `index.html` file to launch the app in your browser.
+Open `http://127.0.0.1:4173`. Root `index.html` is a build template; serve generated `dist/`, not the raw source. Local/preview builds are noindex. To exercise the service worker locally, run `node scripts/build-netlify.mjs --production` before starting the server.
 
-### Web App
+Content and routes: `content/pages.mjs`. Translations: `locales/`. Site identity: `config/site.json`. Active application modules: `assets/js/app.js`, `core.js`, `image-engine.js`, `codec-loader.js`, `theme.js`. Legacy upstream modules remain as reference but are not shipped by the generator.
 
-1. Visit [MAZANOKE.com](https://mazanoke.com/), or self-host for even stronger privacy.
-1. Click the "Install" button in the top-right.
-   - If the button isn’t available, you can still install it manually in a few simple clicks. ([See how](./docs/install-web-app.md#manual-install))
-1. A shortcut to MAZANOKE will be added to your device and can even be used offline.
+## Hosting
 
-<img src=".github/images/install-web-app/capture-install-pwa-button.png" alt="Install MAZANOKE progressive web app button" height="100">
+The existing Netlify Free project builds static `dist/`; no Functions or paid add-ons. Git continuous deployment is not currently linked. See [Netlify operations](docs/NETLIFY-VI.md).
 
-## Screenshots
+Alternatively, run `docker compose up --build -d` and visit `http://localhost:3474`. See [Docker configuration](docs/configuration.md). Docker runtime validation is pending because the local engine was not running.
 
-<center>
-   <img src=".github/images/v1.1.5/featured-image-mobile-group-dark-light.jpg" alt="mazanoke mobile devices" width="1200">
-</center>
+## Verification and license
 
-<center>
-   <img src=".github/images/v1.1.5/featured-desktop-solo-light.jpg" alt="mazanoke desktop screen capture light mode" width="1200">
-</center>
-
-|                                                                                                                           |                                                                                                                                |
-| :-----------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------: |
-|       Dark mode<br><img src=".github/images/v1.1.5/capture-desktop-dark.jpg" alt="mazanoke dark mode" width="90%%">       |        Light mode<br><img src=".github/images/v1.1.5/capture-desktop-light.jpg" alt="mazanoke light mode" width="90%%">        |
-| Settings<br><img src=".github/images/v1.1.5/capture-desktop-solo-settings-dark.jpg" alt="mazanoke settings" width="90%%"> | Download images<br><img src=".github/images/v1.1.5/capture-desktop-solo-output-dark.jpg" alt="mazanoke settings" width="90%%"> |
-
-## Attributions
-
-- [Browser Image Compression](https://github.com/Donaldcwl/browser-image-compression)
-- [heic-to](https://github.com/hoppergee/heic-to), [libheif](https://github.com/strukturag/libheif), [libde265](https://github.com/strukturag/libde265)
-- [JSZip](https://github.com/Stuk/jszip)
-
-[View full list and details](./docs/ATTRIBUTIONS.md)
-
-## License
-
-[GNU General Public License v3.0](https://github.com/civilblur/mazanoke/blob/main/README.md)
+[Release checks](docs/RELEASE-CHECKS.md) distinguish completed browser checks from unverified environments. [GPL-3.0 license](LICENSE) and [third-party attributions](docs/ATTRIBUTIONS.md) apply.

@@ -1,13 +1,8 @@
-# docker compose -f compose.dev.yaml up --build
-
 services:
-  mazanoke:
+  anhgon:
     build:
       context: .
-    environment:
-      - USERNAME=test
-      - PASSWORD=test
-      - METATAGS=true # development
+      args:
+        SITE_URL: http://localhost:3475
     ports:
       - "3475:80"
-    restart: unless-stopped

@@ -1,0 +1,7 @@
+{
+  "brand": "AnhGon",
+  "defaultLocale": "vi",
+  "productionUrl": "https://anh-gon-vn.netlify.app",
+  "sourceUrl": "https://github.com/nguyenan97/mazanoke",
+  "locales": ["vi", "en"]
+}

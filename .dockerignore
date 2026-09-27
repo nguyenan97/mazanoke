@@ -1,0 +1,9 @@
+.git
+.netlify
+.playwright-cli
+node_modules
+dist
+output
+*.env
+.env*
+*.secret

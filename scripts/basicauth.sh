@@ -7,7 +7,7 @@ if [ -n "$USERNAME" ] && [ -n "$PASSWORD" ]; then
   # Make this script idempotent across container restarts.
   # Without this, repeated runs will insert duplicate directives and Nginx will fail to start.
   sed -i '/auth_basic/d' /etc/nginx/conf.d/default.conf
-  sed -i '/location = \/index.html {/a \        auth_basic "Restricted Content";\n        auth_basic_user_file \/etc\/nginx\/.htpasswd;' /etc/nginx/conf.d/default.conf
+  sed -i '/^server {/a \    auth_basic "Restricted Content";\n    auth_basic_user_file \/etc\/nginx\/.htpasswd;' /etc/nginx/conf.d/default.conf
 else
   rm -f /etc/nginx/.htpasswd
   sed -i '/auth_basic/d' /etc/nginx/conf.d/default.conf

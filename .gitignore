@@ -14,3 +14,5 @@ Thumbs.db
 dist/
 .netlify/
 node_modules/
+.playwright-cli/
+output/playwright/
