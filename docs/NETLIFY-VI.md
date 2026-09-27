@@ -2,6 +2,15 @@
 
 Bản Việt hóa của MAZANOKE. Xử lý ảnh client-side, không cần database, API key hoặc Functions.
 
+## Site hiện tại
+
+- Production: https://anh-gon-vn.netlify.app/
+- Dashboard: https://app.netlify.com/projects/anh-gon-vn
+- Site ID: `190d2047-b9db-4f47-ba7e-519f696cfefd`
+- Team: `nguyenan6197`, gói Free tại thời điểm tạo ngày 2026-09-27.
+- Deploy qua Netlify plugin, build trên Netlify. **Chưa liên kết GitHub continuous deployment**; push repo chưa tự cập nhật production. Muốn bật, liên kết repo `nguyenan97/mazanoke` vào project hiện tại trong Netlify, không tạo project mới.
+- Đã kiểm tra production: HTTPS public, Inter, canonical/robots/sitemap, chuyển WebP, tạo ZIP. Browser automation chưa xác nhận lưu file xuống ổ đĩa (download bị hủy trong môi trường kiểm thử).
+
 ## Deploy từ GitHub
 
 1. Đăng nhập Netlify, dùng team ở gói **Free**.

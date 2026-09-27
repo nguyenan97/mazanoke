@@ -70,4 +70,3 @@ MAZANOKE would not be possible without the projects listed here.
 # Vietnamese edition
 
 - Inter Variable 5.3.0, by Rasmus Andersson and contributors, distributed through `@fontsource-variable/inter`. SIL Open Font License 1.1: `assets/fonts/inter/LICENSE`. Latin, Latin Extended and Vietnamese subsets are self-hosted.
-
