@@ -13,7 +13,7 @@
     <meta name="robots" content="index, follow" />
     <script>
       function setTheme(themeName) {
-        localStorage.setItem("theme", themeName);
+        localStorage.setItem("anhgon-theme", themeName);
         document.documentElement.classList.toggle(
           "theme-dark",
           themeName === "theme-dark",
@@ -31,14 +31,14 @@
       function toggleTheme() {
         document.documentElement.classList.add("animate-0");
         setTheme(
-          localStorage.getItem("theme") === "theme-dark"
+          localStorage.getItem("anhgon-theme") === "theme-dark"
             ? "theme-light"
             : "theme-dark",
         );
       }
 
       (function () {
-        const theme = localStorage.getItem("theme") || "theme-dark";
+        const theme = localStorage.getItem("anhgon-theme") || "theme-light";
         setTheme(theme);
       })();
     </script>
@@ -63,9 +63,9 @@
       href="./assets/images/favicon-16x16.png"
     />
     <link rel="manifest" href="/manifest.json" />
-    <link rel="stylesheet" href="./assets/css/vietnamese.css" />
+    <link rel="stylesheet" href="./assets/css/professional.css" />
     <!-- deployment-meta -->
-    <meta name="theme-color" content="#191919" />
+    <meta name="theme-color" content="#f7f8fa" />
   </head>
 
   <body>
@@ -73,14 +73,11 @@
 
     <nav class="top-nav">
       <div class="logo-container">
-        <img
-          class="logo-image"
-          src="./assets/images/symbol-192x192.png"
-          alt="Biểu tượng MAZANOKE"
-        />
+        <span class="brand-mark" aria-hidden="true">ag</span>
         <span class="logo-text">Ảnh Gọn</span>
       </div>
 
+      <div class="header-links"><a href="#compressDropZone">Công cụ</a><a href="#guide-title">Hướng dẫn</a><a href="#faq">Câu hỏi thường gặp</a></div>
       <div class="top-nav-actions">
         <div class="theme-switch-container">
           <label id="themeSwitch" class="switch switch--theme">
@@ -151,9 +148,16 @@
 
     <main class="content">
       <header class="intro">
-        <p class="intro-eyebrow">MIỄN PHÍ · XỬ LÝ NGAY TRÊN THIẾT BỊ</p>
-        <h1>Nén ảnh nhẹ hơn.<br>Chia sẻ nhanh hơn.</h1>
-        <p>Giảm dung lượng JPG, PNG, WebP, đổi định dạng và thu nhỏ ảnh.<br>Chọn tùy chỉnh trước, rồi kéo ảnh vào để bắt đầu.</p>
+        <p class="intro-eyebrow">Công cụ xử lý ảnh miễn phí</p>
+        <h1>Nén ảnh online</h1>
+        <p>Giảm dung lượng, đổi định dạng và thay đổi kích thước ảnh ngay trong trình duyệt.<br>Không cần tài khoản. Ảnh được xử lý trên thiết bị của bạn.</p>
+        <div class="quick-tools" aria-label="Tùy chỉnh nhanh">
+          <button type="button" data-preset="200kb" aria-pressed="false">Nén ảnh 200 KB</button>
+          <button type="button" data-preset="jpg" aria-pressed="false">HEIC / PNG sang JPG</button>
+          <button type="button" data-preset="webp" aria-pressed="false">Đổi sang WebP</button>
+          <button type="button" data-preset="1200px" aria-pressed="false">Thu nhỏ còn 1200 px</button>
+        </div>
+        <p id="presetStatus" class="preset-status" role="status" aria-live="polite"></p>
       </header>
       <div class="drop-zone" id="compressDropZone">
         <div class="drop-zone__border-dashed"></div>
@@ -187,7 +191,7 @@
               </svg>
               <div class="flex flex-col items-center gap-3xs w-100">
                 <div class="drop-zone-content__actions-title">
-                  Kéo thả hoặc dán ảnh
+                  Kéo thả ảnh vào đây
                 </div>
                 <div class="drop-zone-content__actions-description">
                   <span>jpg</span>
@@ -217,8 +221,8 @@
                   fill="currentColor"
                 ></path>
               </svg>
-              Chọn ảnh
-            </button>
+              Chọn ảnh từ thiết bị</button>
+            <p class="privacy-note">Hoặc dán ảnh bằng Ctrl + V · Có thể chọn nhiều ảnh</p>
           </div>
 
           <div class="progress-container hidden">
@@ -328,9 +332,9 @@
         <div class="image-subpage">
           <div class="image-options-container" data-elevation="2">
             <div class="image-subpage-title-container">
-              <h2 class="h4">Tùy chỉnh</h2>
+              <h2 class="h4">Tùy chỉnh ảnh</h2>
               <div class="image-subpage-title-description">
-                Ảnh được xử lý ngay trên thiết bị, không tải lên server.
+                Áp dụng cho những ảnh được chọn tiếp theo.
               </div>
             </div>
 
@@ -958,6 +962,7 @@
     <section class="guide" aria-labelledby="guide-title">
       <h2 id="guide-title">Nén ảnh online bằng Ảnh Gọn</h2>
       <ol><li>Chọn chất lượng hoặc dung lượng mong muốn, ví dụ 200 KB.</li><li>Chọn định dạng và giới hạn kích thước nếu cần.</li><li>Chọn hoặc kéo thả ảnh vào khung. Tải từng ảnh hoặc tải tất cả dưới dạng ZIP.</li></ol>
+      <h3 id="faq">Câu hỏi thường gặp</h3>
       <details><summary>Nên chọn JPG, PNG hay WebP?</summary><p>JPG phù hợp ảnh chụp. PNG phù hợp logo và ảnh cần nền trong suốt, nhưng không phải lúc nào cũng nén nhỏ. WebP thường phù hợp đăng website và vẫn hỗ trợ nền trong suốt. Đổi sang JPG sẽ mất nền trong suốt.</p></details>
       <details><summary>Có nén ảnh xuống 200 KB được không?</summary><p>Chọn “Giới hạn dung lượng”, nhập 200 và chọn KB trước khi thêm ảnh. Kết quả phụ thuộc ảnh gốc và định dạng; nếu chưa đạt, hãy giảm kích thước hoặc chọn JPG/WebP rồi thử lại.</p></details>
       <details><summary>Có chuyển HEIC sang JPG được không?</summary><p>Chọn JPG ở “Định dạng đầu ra”, rồi chọn ảnh HEIC từ thiết bị. Bạn có thể xử lý nhiều ảnh trong một lần. Ảnh quá lớn có thể vượt bộ nhớ của điện thoại.</p></details>
@@ -1011,6 +1016,7 @@
     <script type="text/javascript" src="./assets/js/compression.js"></script>
     <script type="text/javascript" src="./assets/js/download.js"></script>
     <script type="text/javascript" src="./assets/js/events.js"></script>
+    <script src="./assets/js/presets.js"></script>
     <script>
       if ("serviceWorker" in navigator) {
         function promptUpdate(registration) {

@@ -1,4 +1,4 @@
-> **Bản tiếng Việt — Ảnh Gọn:** [Deploy lên Netlify Free](docs/NETLIFY-VI.md). Fork từ MAZANOKE, xử lý ảnh ngay trên thiết bị. Thông tin upstream bên dưới.
+> **Bản tiếng Việt — Ảnh Gọn:** [Deploy lên Netlify Free](docs/NETLIFY-VI.md) · [Định hướng sản phẩm, thiết kế và SEO](docs/PRODUCT-PLAN.md). Fork từ MAZANOKE, xử lý ảnh ngay trên thiết bị. Thông tin upstream bên dưới.
 
 <h1 align="center">
   <img src=".github/images/mazanoke-app-icon.png" alt="mazanoke icon" width="120">
