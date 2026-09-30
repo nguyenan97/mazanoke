@@ -21,3 +21,5 @@ Không có account, database, upload API, analytics hoặc quảng cáo. Search 
 ## Vận hành
 
 Giữ site Netlify Free hiện tại và URL ổn định. Git push chưa tự deploy vì continuous deployment chưa liên kết. Không tạo project mới. Xem [NETLIFY-VI.md](NETLIFY-VI.md) và [RELEASE-CHECKS.md](RELEASE-CHECKS.md).
+
+Ngày 30/09 bổ sung quy trình release theo đợt: local checks, browser QA, GitHub CI miễn phí và candidate có checksum; **chưa deploy** để giữ quota. Sửa TIFF orientation và Docker CRLF đã pass local. [Release policy](RELEASE-POLICY.md), [demo và draft chia sẻ](LAUNCH-KIT.md).

@@ -31,12 +31,22 @@ async function preprocess(file, type, signal) {
     const buffer = await file.arrayBuffer(), first = utif.decode(buffer)[0];
     if (!first || !first.t256 || !first.t257 || first.t256[0] * first.t257[0] > 40000000) throw new Error('tooLarge');
     utif.decodeImage(buffer, first);
-    const canvas = document.createElement('canvas');
+    const canvas = document.createElement('canvas'), oriented = document.createElement('canvas');
     canvas.width = first.width; canvas.height = first.height;
     try {
       canvas.getContext('2d').putImageData(new ImageData(new Uint8ClampedArray(utif.toRGBA8(first)), first.width, first.height), 0, 0);
-      return await canvasBlob(canvas, 'image/png');
-    } finally { canvas.width = canvas.height = 1; }
+      const orientation = Number(first.t274?.[0] || 1), w = first.width, h = first.height;
+      if (!Number.isInteger(orientation) || orientation < 2 || orientation > 8) return await canvasBlob(canvas, 'image/png');
+      oriented.width = orientation >= 5 ? h : w;
+      oriented.height = orientation >= 5 ? w : h;
+      const transforms = {
+        2:[-1,0,0,1,w,0], 3:[-1,0,0,-1,w,h], 4:[1,0,0,-1,0,h],
+        5:[0,1,1,0,0,0], 6:[0,1,-1,0,h,0], 7:[0,-1,-1,0,h,w], 8:[0,-1,1,0,0,w]
+      };
+      const context = oriented.getContext('2d');
+      context.setTransform(...transforms[orientation]); context.drawImage(canvas, 0, 0);
+      return await canvasBlob(oriented, 'image/png');
+    } finally { canvas.width = canvas.height = oriented.width = oriented.height = 1; }
   }
   return file.type === type ? file : new Blob([file], { type });
 }

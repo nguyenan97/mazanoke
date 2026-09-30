@@ -10,6 +10,8 @@
 
 ## Deploy
 
+**Quy định mới ngày 30/09/2026:** hoàn tất cả đợt thay đổi và QA local rồi mới gom một lần deploy. Đợt hiện tại giữ candidate local, không deploy Netlify. Xem [RELEASE-POLICY.md](RELEASE-POLICY.md). GitHub CI chỉ kiểm tra local.
+
 Tái sử dụng project trên. Netlify plugin upload source và chạy build trên Netlify. **Chưa liên kết GitHub continuous deployment**: push repo không tự cập nhật production. Nếu bật sau này, liên kết `nguyenan97/mazanoke` vào project hiện tại; không tạo project trùng.
 
 Build không cần install runtime dependencies. `CONTEXT=production` tạo bản indexable; preview/local có noindex. Canonical origin lấy theo thứ tự `SITE_URL`, `URL` của Netlify, `config/site.json`. Luôn dùng origin production cho canonical, không dùng deploy-preview hostname.

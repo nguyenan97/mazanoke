@@ -4,6 +4,10 @@ Free Vietnamese and English image tools. Compress, convert and resize batches in
 
 [Tiếng Việt](https://anh-gon-vn.netlify.app/) · [English](https://anh-gon-vn.netlify.app/en/) · [Free growth plan](docs/SEO-GROWTH-PLAN.md) · [Deployment](docs/NETLIFY-VI.md)
 
+![AnhGon: a locally generated sample compressed to a 200 KB target](.github/images/anhgon/desktop-vi.png)
+
+[Mobile demo](.github/images/anhgon/mobile-en.png) · [Demo scripts and sharing drafts](docs/LAUNCH-KIT.md)
+
 This GPL-3.0 fork is built from [MAZANOKE by civilblur](https://github.com/civilblur/mazanoke). Upstream credits and third-party notices are preserved in [ATTRIBUTIONS](docs/ATTRIBUTIONS.md).
 
 ## Features
@@ -24,6 +28,7 @@ Node.js 20+; no npm runtime dependencies required.
 
 ```sh
 npm test
+npm run check
 npm run build
 npm start
 ```
@@ -36,7 +41,13 @@ Content and routes: `content/pages.mjs`. Translations: `locales/`. Site identity
 
 The existing Netlify Free project builds static `dist/`; no Functions or paid add-ons. Git continuous deployment is not currently linked. See [Netlify operations](docs/NETLIFY-VI.md).
 
-Alternatively, run `docker compose up --build -d` and visit `http://localhost:3474`. See [Docker configuration](docs/configuration.md). Docker runtime validation is pending because the local engine was not running.
+Alternatively, run `docker compose up --build -d` and visit `http://localhost:3474`. See [Docker configuration](docs/configuration.md). Docker runtime, route handling and optional authentication/restart passed local smoke checks on 2026-09-30.
+
+## Batch releases
+
+Keep changes local until the release plan and QA are complete. `npm run check` runs automated checks and validates the production build without deploying. After committing, `npm run release:prepare` creates a local candidate with file checksums under ignored `.netlify/release-candidates/`.
+
+GitHub CI verifies local browser flows, TIFF orientation and Docker on a standard public-repository runner. It has no Netlify deployment step. Production is deliberately held during the current quota-saving period; see [release policy](docs/RELEASE-POLICY.md).
 
 ## Verification and license
 

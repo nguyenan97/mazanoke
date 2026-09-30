@@ -15,7 +15,7 @@ RUN SITE_URL="$SITE_URL" CONTEXT="$CONTEXT" node scripts/build-netlify.mjs
 FROM nginx:alpine
 RUN apk add --no-cache apache2-utils
 COPY scripts/basicauth.sh /usr/local/bin/basicauth.sh
-RUN chmod +x /usr/local/bin/basicauth.sh
+RUN sed -i 's/\r$//' /usr/local/bin/basicauth.sh && chmod +x /usr/local/bin/basicauth.sh
 COPY config/nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=prepare /app/dist /usr/share/nginx/html
 

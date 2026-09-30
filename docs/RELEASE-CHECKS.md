@@ -29,8 +29,8 @@ The sample file-size numbers depend on browser encoders; they are observations, 
 
 ## Limits of this verification
 
-- Safari/iOS hardware, unusual HEIC variants, TIFF orientation and low-memory devices have not been comprehensively tested.
-- Docker Engine was not running; Docker build/Nginx runtime validation remains pending.
+- Safari/iOS hardware, unusual HEIC variants and low-memory devices have not been comprehensively tested. TIFF orientation now has a dedicated eight-orientation pixel check below.
+- Docker was initially unverified; local build/Nginx route/auth/restart checks were completed in the quota-saving follow-up below.
 - Search Console ownership was verified and the sitemap submitted on 2026-09-28. Search performance data is still processing; no traffic or conversion rate is claimed.
 
 ## Production verification
@@ -65,3 +65,17 @@ The first source upload returned a Netlify server 500. A second upload containin
 - Re-ran all 11 automated checks and the production HTTP checks: passed. Production remains version `1f6966c8046c`, with all 14 canonical routes returning 200, sitemap containing 14 URLs, unknown routes returning 404 and `/en/index.html` redirecting with 301.
 - Performance baseline observed on 2026-09-30: default 3-month Web report shows **0 clicks**, **0 impressions**, **No data** in Queries; the displayed chart currently covers only 2026-09-27. This is the available Google Search report, not a measurement of direct visits or image processing.
 - Remaining external condition: Google crawling and indexing. Search Console discovery counts are not indexed-page counts or product usage. Review Page indexing and Performance when new data exists; adding languages or duplicate landing pages is not justified by current data.
+
+## Quota-saving local release — 2026-09-30
+
+**No Netlify deployment performed in this work batch.** Production remains version `1f6966c8046c`; the next local application build is `64363715005d`.
+
+- Reproduced TIFF tag 274 being ignored: orientation 1 passed, orientations 2–8 failed. Implemented all flips/rotations and dimension swaps. Independently defined six-color pixel expectations now pass all 8 cases on Chrome and Playwright WebKit. Fixture generated locally with bundled UTIF; no proprietary image is used. [TIFF 6.0 Orientation specification](https://image-js.github.io/tiff/media/TIFF6.pdf), [UTIF API](https://github.com/photopea/UTIF.js).
+- Chrome and WebKit browser flows passed: JPG sample at/below 200,000 bytes, quality mode after clearing hidden target, 300 × 200 WebP output, actual image and ZIP saved, matching task after language switch, light/dark and no mobile overflow. No uncaught application errors or non-GET image requests in these flows.
+- WebKit with iPhone 15 emulation additionally passed HEIC fixture → JPG 1280 × 854, valid 256 px ICO, explicit offline save → network disabled → navigate → WebP conversion. This is WebKit on Windows, not physical Safari/iOS validation.
+- Started Docker Desktop and built the image. Found a real Windows CRLF failure: container restarted with `basicauth.sh: not found`. Dockerfile now strips CRLF; `.gitattributes` keeps shell scripts LF on future checkouts.
+- Docker smoke passed all 14 routes and assets, noindex for local instances, real 404, explicit index 301, optional Basic authentication covering HTML/robots/sitemap/JS, and authentication after restart. Disposable test containers were removed.
+- `npm run check` passes the 11 existing automated checks plus independent production-output checks for unique metadata, internal links, exact language pairs, sitemap, robots and redirect rules.
+- Added GitHub verification workflow for the public repo with standard Ubuntu runner, read-only contents permission, browser regression and Docker smoke. It has no Netlify credentials or deploy step.
+- Added local-only `release:prepare`: clean Git revision, successful checks, copied static files and SHA-256 manifest. Candidate stays under ignored `.netlify/release-candidates/`.
+- Prepared real sample screenshots and Vietnamese/English sharing drafts in `LAUNCH-KIT.md`; nothing was posted to external communities. Screenshot/build-size values are browser-specific observations.

@@ -2,6 +2,8 @@
 
 Cập nhật 30/09/2026. Kế hoạch này thay thế đề xuất mua custom domain và đặt English ở root. Ràng buộc hiện tại: **không chi tiền**, dùng site Netlify đang có, phát triển dựa trên nhu cầu thực.
 
+Yêu cầu vận hành mới: gom cả đợt thay đổi và kiểm tra local trước khi deploy để giữ quota. Đợt 30/09 có candidate local, **không deploy Netlify**. [Quy trình release](RELEASE-POLICY.md).
+
 ## Quyết định về tên, URL và ngôn ngữ
 
 - Tên hiển thị: **Ảnh Gọn** trong tiếng Việt, **AnhGon** trong tiếng Anh. Giữ attribution MAZANOKE/civilblur và GPL-3.0.
@@ -47,7 +49,7 @@ Baseline review 30/09: Search Console Performance hiện hiển thị 0 clicks, 
 3. **Mỗi lần đánh giá 28 ngày:** ưu tiên page có impression và query đúng ý định nhưng CTR thấp để sửa title/description; page đã có click nhưng hướng dẫn thiếu thì bổ sung ví dụ thật. Page chưa được index cần kiểm tra lý do trước khi thêm page mới. Lịch này là hướng dẫn vận hành, chưa tạo automation.
 4. **Nội dung kế tiếp:** resize và PNG→JPG là backlog. Chỉ thêm khi query/review cho thấy nhu cầu và có nội dung riêng. 50/100 KB dùng chung ô mục tiêu trước; không tạo hàng loạt trang chỉ thay con số.
 5. **Ngôn ngữ kế tiếp:** chỉ ưu tiên khi có tín hiệu lặp lại từ một thị trường và có khả năng biên tập/kiểm tra bản dịch. Không chọn chỉ vì quốc gia đó đông dân.
-6. **Phân phối miễn phí:** repository README và link công cụ; chuẩn bị bài demo cho cộng đồng liên quan. Chỉ gửi/đăng ra cộng đồng khi chủ site chỉ định nơi đăng và cho phép gửi. Không spam backlink.
+6. **Phân phối miễn phí:** README đã có link công cụ và screenshot hiện tại. [LAUNCH-KIT.md](LAUNCH-KIT.md) có 3 kịch bản demo, draft Việt/Anh và nhật ký phản hồi; chưa đăng ra cộng đồng. Chỉ gửi/đăng khi chủ site chỉ định nơi đăng và cho phép gửi. Không spam backlink.
 
 Không đặt forecast doanh thu, ranking hoặc người dùng khi chưa có dữ liệu. Giai đoạn đầu tối ưu khả năng hoàn tất tác vụ và index đúng; chưa thêm ads, affiliate hay biểu mẫu lấy email.
 
@@ -56,6 +58,21 @@ Không đặt forecast doanh thu, ranking hoặc người dùng khi chưa có d�
 - Unit/build checks cho bytes, MIME, ZIP pairing, ICO, metadata, route pairing và lazy codecs.
 - Browser checks cho download thật, lỗi giữa batch, JPEG alpha, WebP/resize, HEIC, offline, mobile và dark mode.
 - Kiểm tra production sau deploy, bao gồm 404, redirect, canonical, sitemap và preset.
-- Safari/iOS thật và Docker engine chưa được xác minh trong môi trường hiện tại; không ghi đã pass các môi trường này.
+- Docker runtime/routes/auth/restart và WebKit với iPhone emulation đã pass ngày 30/09. Safari/iOS thật chưa có thiết bị để xác minh; không ghi đã pass hardware.
+
+## Trạng thái cuối đợt local 30/09/2026
+
+| Hạng mục | Trạng thái | Bằng chứng / bước tiếp theo |
+|---|---|---|
+| 5 tác vụ × Việt/Anh, static SEO, tên/URL | Hoàn thành, đang live | Giữ 14 URL ổn định |
+| Search Console và sitemap | Hoàn thành thiết lập | Sitemap Success, phát hiện 14 URL |
+| TIFF orientation | Sửa xong, giữ local | 8/8 orientation pass pixel/dimension trên Chrome và WebKit |
+| Docker | Sửa xong, giữ local | CRLF được normalize; routes/auth/restart pass |
+| Browser QA bổ sung | Hoàn thành local | JPG 200 KB, quality mode, WebP resize, download/ZIP, locale, HEIC, ICO, offline |
+| Demo và draft phân phối | Chuẩn bị xong | `LAUNCH-KIT.md` và screenshot README; chưa đăng |
+| Release theo đợt | Đã triển khai | `npm run check`, CI không deploy, `release:prepare` tạo candidate có checksum |
+| Google crawl/index và dữ liệu quốc gia/query | Chờ bên ngoài | Homepage Discovered - currently not indexed ở lần review; chưa suy diễn nhu cầu riêng của site |
+| Resize/PNG→JPG page hoặc ngôn ngữ thứ ba | Backlog có điều kiện | Chỉ mở khi dữ liệu hoặc phản hồi hỗ trợ |
+| Safari/iOS hardware | Chưa xác minh | Cần thiết bị thật, WebKit emulation không thay thế |
 
 Chi tiết vận hành: [NETLIFY-VI.md](NETLIFY-VI.md). Kết quả kiểm tra: [RELEASE-CHECKS.md](RELEASE-CHECKS.md).
