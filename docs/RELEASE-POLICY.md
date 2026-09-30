@@ -1,6 +1,6 @@
 # Release theo đợt, giữ quota Netlify
 
-Yêu cầu chủ site ngày 30/09/2026: hoàn thành plan và kiểm tra trước khi deploy; hạn chế deploy để không hết quota trong tháng. **Đợt này chỉ commit/push, không deploy Netlify.**
+Yêu cầu chủ site ngày 30/09/2026: hoàn thành plan và kiểm tra trước khi deploy; hạn chế deploy để không hết quota trong tháng. Yêu cầu tiếp theo đã cho phép hoàn thiện UI/code và deploy. **Đợt UI này publish production một lần sau QA và CI; không tạo preview deploy.**
 
 ## Quy trình mặc định
 
@@ -10,7 +10,7 @@ Yêu cầu chủ site ngày 30/09/2026: hoàn thành plan và kiểm tra trướ
 4. Nếu sửa Docker, build local và chạy `node scripts/qa/docker-smoke.mjs <image>`. Kiểm tra routes, auth và restart. Không push container lên registry.
 5. Cập nhật `RELEASE-CHECKS.md`, ghi chính xác môi trường đã kiểm tra và phần chưa xác minh; commit/push GitHub.
 6. Từ working tree sạch, chạy `npm run release:prepare`. Lưu một candidate trong `.netlify/release-candidates/<version>-<commit>/public/`, kèm `release.json` chứa commit, version, origin, dung lượng và SHA-256 từng file. Lệnh không upload hoặc deploy.
-7. Khi kết thúc thời gian giữ quota và cần phát hành, kiểm tra quota thực tế của Netlify, chọn candidate đã QA rồi publish **một lần**. Kiểm tra production một lượt sau publish; chỉ deploy lại nếu có lỗi ảnh hưởng người dùng cần sửa.
+7. Khi chủ site cho phép phát hành, xác nhận site/plan hiện tại, chọn candidate đã QA rồi publish **một lần**. Không suy đoán quota còn lại nếu API không trả dữ liệu Usage. Nếu Netlify chặn vì quota, giữ candidate và báo rõ; không nâng gói. Kiểm tra production một lượt sau publish; chỉ deploy lại nếu có lỗi ảnh hưởng người dùng cần sửa.
 
 Không đặt mục tiêu số lần deploy theo một quota giả định. Không bật Git continuous deployment trong giai đoạn này; GitHub push không được tạo Netlify build/preview. Không mua gói, bật auto recharge hoặc trả phí để vượt quota.
 
@@ -21,8 +21,8 @@ Không đặt mục tiêu số lần deploy theo một quota giả định. Khô
 ## Candidate và production là hai trạng thái riêng
 
 - Production hiện tại: version `1f6966c8046c`, deploy `6aba77db68c13400d1c0ae8e` ngày 28/09/2026.
-- Candidate tiếp theo: sửa TIFF orientation và Docker CRLF; đã kiểm tra local, giữ lại chưa publish.
-- Application version của candidate: `64363715005d`, 43 files / 4,064,985 bytes. Chọn folder theo commit mới nhất đã hoàn tất QA; `release.json` ghi revision chính xác. [CI đã pass](https://github.com/nguyenan97/mazanoke/actions/runs/36723499637).
+- Candidate cũ `64363715005d` gồm TIFF orientation và Docker CRLF đã pass [CI](https://github.com/nguyenan97/mazanoke/actions/runs/36723499637); được thay bằng đợt UI mới.
+- Application version đợt UI: `48ef738bb1d5`. Dropdown borderless, navigation theo tác vụ, kết quả dạng hàng, copy trực tiếp và theme trung tính. Bao gồm các sửa lỗi TIFF/Docker trước đó. Chọn folder theo commit mới nhất đã hoàn tất QA; `release.json` ghi revision chính xác.
 - Demo/screenshots và tài liệu vận hành chỉ ở GitHub; static generator không đưa chúng vào bundle.
 - Safari/iOS thật chưa có thiết bị để kiểm tra. WebKit trên Windows với iPhone emulation là bằng chứng bổ sung, không được ghi thành đã pass thiết bị iPhone thật.
 

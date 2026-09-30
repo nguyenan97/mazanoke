@@ -9,7 +9,7 @@ Công cụ image compression/conversion miễn phí bằng Vietnamese và Englis
 - Batch tối đa 50 file, 50 MB/file và giới hạn ảnh decode 40 megapixel; xử lý lần lượt. Lỗi một file không làm hỏng các file còn lại.
 - Kết quả giữ blob, tên và thumbnail cùng nhau. ZIP tự tránh trùng tên; giới hạn tổng kết quả 100 MB, ZIP 75 MB để giảm rủi ro hết bộ nhớ.
 - JPG nền trắng; ảnh động thành ảnh tĩnh; EXIF bị loại bỏ. AVIF tùy hỗ trợ của browser. Không cam kết mọi ảnh đều nhẹ hơn hay luôn đạt mục tiêu.
-- Inter tự host, light/dark, desktop 2 cột và mobile upload trước; ảnh mẫu tạo tại chỗ, kéo thả, chọn file, paste.
+- Inter tự host, light/dark, desktop 2 cột và mobile upload trước; navigation 5 tác vụ, dropdown borderless, kết quả dạng hàng; ảnh mẫu tạo tại chỗ, kéo thả, chọn file, paste.
 - Lazy-load codecs; offline tải theo yêu cầu; update chỉ reload sau khi đã xóa kết quả để tránh mất batch.
 
 ## Hệ thống
@@ -22,4 +22,4 @@ Không có account, database, upload API, analytics hoặc quảng cáo. Search 
 
 Giữ site Netlify Free hiện tại và URL ổn định. Git push chưa tự deploy vì continuous deployment chưa liên kết. Không tạo project mới. Xem [NETLIFY-VI.md](NETLIFY-VI.md) và [RELEASE-CHECKS.md](RELEASE-CHECKS.md).
 
-Ngày 30/09 bổ sung quy trình release theo đợt: local checks, browser QA, GitHub CI miễn phí và candidate có checksum; **chưa deploy** để giữ quota. Sửa TIFF orientation và Docker CRLF đã pass local. [Release policy](RELEASE-POLICY.md), [demo và draft chia sẻ](LAUNCH-KIT.md).
+Ngày 30/09 bổ sung quy trình release theo đợt: local checks, browser QA, GitHub CI miễn phí và candidate có checksum. Chủ site đã cho phép publish đợt UI một lần sau QA/CI. UI mới, TIFF orientation và Docker CRLF đã pass local; kết quả production sẽ ghi riêng sau publish. [Release policy](RELEASE-POLICY.md), [demo và draft chia sẻ](LAUNCH-KIT.md).

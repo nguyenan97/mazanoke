@@ -50,7 +50,7 @@ function tool(messages, entry) {
   <div class="workspace">
     <div class="work-area">
       <div><section id="dropzone" class="dropzone" aria-labelledby="drop-title">
-        <svg class="upload-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="5" y="7" width="38" height="34" rx="6"/><circle cx="32" cy="17" r="4"/><path d="m6 33 12-14 12 16 6-8 7 9"/></svg>
+        <svg class="upload-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M16 21V5m-6 6 6-6 6 6M6 21v6h20v-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         <h2 id="drop-title">${t('drop')}</h2><p class="format-list">${t('formats')}</p>
         <input id="files" class="visually-hidden" type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif,image/avif,image/tiff,image/gif,image/svg+xml,image/x-icon,.heic,.heif,.tif,.tiff,.ico" multiple aria-label="${t('pick')}" tabindex="-1">
         <button id="choose" class="primary" type="button">${t('pick')}</button><p class="paste-hint">${t('paste')}</p>
@@ -63,7 +63,7 @@ function tool(messages, entry) {
       <div class="field"><label for="quality">${t('quality')} <output id="quality-value" for="quality">80%</output></label><input id="quality" type="range" min="1" max="100" value="80"></div>
       <div class="field wide" id="target-field" hidden><label for="target">${t('target')}</label><div class="row"><input class="size-value" id="target" type="number" min="0.001" max="100000" value="200" step="any" inputmode="decimal" aria-describedby="unit-hint"><select class="size-unit" id="unit" aria-label="${t('unit')}"><option>KB</option><option>MB</option></select></div><small id="unit-hint">${t('unitHint')}</small><label class="checkbox"><input type="checkbox" id="allow-resize">${t('resizeToFit')}</label></div>
       <div class="field wide"><label for="format">${t('output')}</label><select id="format"><option value="auto">${t('auto')}</option><option value="image/jpeg">JPG</option><option value="image/png">PNG</option><option value="image/webp">WebP</option><option value="image/x-icon">ICO</option></select><small>${t('formatHint')}</small></div>
-      <div class="field wide"><label for="dimensions">${t('dimensions')}</label><input id="dimensions" type="number" min="1" max="8000" placeholder="—" inputmode="numeric"><small>${t('dimensionsHint')}</small></div>
+      <div class="field wide"><label for="dimensions">${t('dimensions')}</label><input id="dimensions" type="number" min="1" max="8000" placeholder="${t('dimensionsPlaceholder')}" inputmode="numeric"><small>${t('dimensionsHint')}</small></div>
     </fieldset></form>
   </div>
   <div class="offline-tools"><button class="text-button" id="offline">${t('offline')}</button><button class="text-button" id="install" hidden>${t('install')}</button><span id="offline-status" role="status"></span></div>
@@ -81,7 +81,7 @@ async function renderPage(page, locale, info = false) {
     body:info ? `<article id="guide" class="article">${entry.paragraphs.map(text => `<p>${escape(text)}</p>`).join('')}</article>` : tool(messages, entry),
     homeUrl:pages[0][locale].path, aboutUrl:infoPages.about[locale].path, privacyUrl:infoPages.privacy[locale].path,
     sourceUrl:site.sourceUrl, alternateUrl:page[other].path, alternateLocale:other,
-    relatedLinks:pages.filter(item => item.id !== page.id).map(item => `<a href="${item[locale].path}">${escape(item[locale].label)}</a>`).join(''),
+    taskNavigation:`<nav class="task-nav" aria-label="${escape(messages.tools)}">${pages.map(item => `<a href="${item[locale].path}"${item.id === page.id ? ' aria-current="page"' : ''}>${escape(item[locale].label)}</a>`).join('')}</nav>`,
     manifest:locale === 'en' ? '/en/manifest.json' : '/manifest.json',
     styleUrl:`${appBase}/app.css`, themeUrl:`${appBase}/theme.js`, appUrl:`${appBase}/app.js`,
     pageConfig:json({ locale, id:page.id || 'info', preset:page.preset || {}, messages, preview:!production })
@@ -93,13 +93,13 @@ for (const page of pages) for (const locale of site.locales) await renderPage(pa
 for (const page of Object.values(infoPages)) for (const locale of site.locales) await renderPage(page, locale, true);
 for (const locale of site.locales) {
   const en = locale === 'en';
-  await save(en ? 'en/manifest.json' : 'manifest.json', JSON.stringify({ name:en ? 'AnhGon — Image tools' : 'Ảnh Gọn — Công cụ ảnh', short_name:dictionaries[locale].brand, id:'/', start_url:en ? '/en/' : '/', scope:'/', lang:locale, display:'standalone', background_color:'#f7f8fb', theme_color:'#f7f8fb', icons:[192,512].map(size => ({ src:`/assets/images/android-chrome-${size}x${size}.png`, sizes:`${size}x${size}`, type:'image/png' })) }, null, 2));
+  await save(en ? 'en/manifest.json' : 'manifest.json', JSON.stringify({ name:en ? 'AnhGon | Image tools' : 'Ảnh Gọn | Công cụ ảnh', short_name:dictionaries[locale].brand, id:'/', start_url:en ? '/en/' : '/', scope:'/', lang:locale, display:'standalone', background_color:'#f6f6f3', theme_color:'#f6f6f3', icons:[192,512].map(size => ({ src:`/assets/images/android-chrome-${size}x${size}.png`, sizes:`${size}x${size}`, type:'image/png' })) }, null, 2));
 }
 await save('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${[...routeSet].map(route => `<url><loc>${escape(absolute(route))}</loc></url>`).join('')}</urlset>\n`);
 await save('robots.txt', `User-agent: *\nAllow: /\n${production ? `Sitemap: ${absolute('/sitemap.xml')}\n` : ''}`);
 await save('_redirects', [...routeSet].map(route => `${route}index.html ${route} 301!`).join('\n') + '\n');
 await save('_headers', `${production ? '' : '/*\n  X-Robots-Tag: noindex, follow\n'}${appBase}/*\n  Cache-Control: public, max-age=31536000, immutable\n`);
-await save('404.html', `<!doctype html><html lang="vi"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>404 — AnhGon</title><link rel="stylesheet" href="${appBase}/app.css"><main class="shell intro"><h1>404</h1><p>Không tìm thấy trang / Page not found.</p><a href="/">Ảnh Gọn</a> · <a href="/en/">English image tools</a></main></html>`);
+await save('404.html', `<!doctype html><html lang="vi"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>404 | AnhGon</title><link rel="stylesheet" href="${appBase}/app.css"><main class="shell intro"><h1>404</h1><p>Không tìm thấy trang / Page not found.</p><a href="/">Ảnh Gọn</a> · <a href="/en/">English image tools</a></main></html>`);
 const core = ['/', '/en/', ...application.map(file => `${appBase}/${file}`), `${appBase}/app.css`, '/manifest.json', '/en/manifest.json', '/assets/fonts/inter/inter-latin-wght-normal.woff2', '/assets/fonts/inter/inter-vietnamese-wght-normal.woff2', '/favicon.ico', '/assets/images/android-chrome-192x192.png', '/assets/images/android-chrome-512x512.png', '/assets/images/apple-touch-icon.png'];
 const offline = [...new Set([...core, ...routeSet, ...vendors.map(file => `/assets/vendor/${file}`)])];
 let sw = await readFile(path.join(root, 'service-worker.js'), 'utf8');

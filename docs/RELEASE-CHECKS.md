@@ -68,7 +68,7 @@ The first source upload returned a Netlify server 500. A second upload containin
 
 ## Quota-saving local release — 2026-09-30
 
-**No Netlify deployment performed in this work batch.** Production remains version `1f6966c8046c`; the next local application build is `64363715005d`.
+**No Netlify deployment was performed in that local-only batch.** Production at its completion remained version `1f6966c8046c`; the local application build was `64363715005d`. The later authorized UI release is recorded separately below.
 
 - Reproduced TIFF tag 274 being ignored: orientation 1 passed, orientations 2–8 failed. Implemented all flips/rotations and dimension swaps. Independently defined six-color pixel expectations now pass all 8 cases on Chrome and Playwright WebKit. Fixture generated locally with bundled UTIF; no proprietary image is used. [TIFF 6.0 Orientation specification](https://image-js.github.io/tiff/media/TIFF6.pdf), [UTIF API](https://github.com/photopea/UTIF.js).
 - Chrome and WebKit browser flows passed: JPG sample at/below 200,000 bytes, quality mode after clearing hidden target, 300 × 200 WebP output, actual image and ZIP saved, matching task after language switch, light/dark and no mobile overflow. No uncaught application errors or non-GET image requests in these flows.
@@ -82,3 +82,13 @@ The first source upload returned a Netlify server 500. A second upload containin
 - Added local-only `release:prepare`: clean Git revision, successful checks, copied static files and SHA-256 manifest. Candidate stays under ignored `.netlify/release-candidates/`.
 - Prepared static candidate has 43 files, 4,064,985 bytes, application version `64363715005d`. SHA-256/size verification passed for every file. Candidate production origin remains `https://anh-gon-vn.netlify.app`; no paid service or extra language was added.
 - Prepared real sample screenshots and Vietnamese/English sharing drafts in `LAUNCH-KIT.md`; nothing was posted to external communities. Screenshot/build-size values are browser-specific observations.
+
+## UI completion before publish, 2026-09-30
+
+- Application version `48ef738bb1d5`; replaces the previous candidate while retaining TIFF and Docker fixes.
+- Reworked the interface with neutral surfaces, green controls, task navigation, simpler result rows and shorter task-specific headings. Removed decorative badges/eyebrow copy and em dashes from visible content. Select controls have no border or shadow; native selection and keyboard focus remain available.
+- `npm run check`: all 11 checks and independent validation of all 14 production pages pass.
+- Chrome and WebKit regression passed JPG within 200,000 bytes, quality mode after clearing unused target, 300 × 200 WebP, actual JPG/ZIP downloads, matching task after language switch, and light/dark toggles. No page errors or non-GET image requests in these flows.
+- TIFF orientations 1–8 passed again in both browsers. WebKit passed HEIC 1280 × 854, valid ICO and offline navigation/conversion again.
+- Inspected new desktop Vietnamese, mobile English and dark mobile screenshots. All 14 routes fit a 360 px viewport. Keyboard ArrowUp/Tab changes compression mode and hides the unused target; all three selects have computed border `0px`, shadow `none` and appearance `none`.
+- Owner authorized one production deployment after QA/CI. This section records local results only; publish and production results will be recorded after they succeed.

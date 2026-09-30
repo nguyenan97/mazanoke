@@ -4,13 +4,13 @@
 - English: [/en/](https://anh-gon-vn.netlify.app/en/)
 - [Dashboard](https://app.netlify.com/projects/anh-gon-vn)
 - Site ID: `190d2047-b9db-4f47-ba7e-519f696cfefd`
-- Team `nguyenan6197`, Free được kiểm tra ngày 27/09/2026.
+- Team `nguyenan6197`, Free được kiểm tra lại ngày 30/09/2026.
 - Build: `node scripts/build-netlify.mjs`; publish: `dist`; Node trên Netlify: 22.
 - Bản review ngày 28/09/2026 đã publish: deploy `6aba77db68c13400d1c0ae8e`, version `1f6966c8046c`.
 
 ## Deploy
 
-**Quy định mới ngày 30/09/2026:** hoàn tất cả đợt thay đổi và QA local rồi mới gom một lần deploy. Đợt hiện tại giữ candidate local, không deploy Netlify. Xem [RELEASE-POLICY.md](RELEASE-POLICY.md). GitHub CI chỉ kiểm tra local.
+**Quy định ngày 30/09/2026:** hoàn tất cả đợt thay đổi và QA local rồi mới gom một lần deploy. Chủ site đã cho phép publish đợt UI sau QA/CI; không tạo preview deploy. Xem [RELEASE-POLICY.md](RELEASE-POLICY.md). GitHub CI chỉ kiểm tra local.
 
 Tái sử dụng project trên. Netlify plugin upload source và chạy build trên Netlify. **Chưa liên kết GitHub continuous deployment**: push repo không tự cập nhật production. Nếu bật sau này, liên kết `nguyenan97/mazanoke` vào project hiện tại; không tạo project trùng.
 

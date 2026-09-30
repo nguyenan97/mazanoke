@@ -2,7 +2,7 @@
 
 Cập nhật 30/09/2026. Kế hoạch này thay thế đề xuất mua custom domain và đặt English ở root. Ràng buộc hiện tại: **không chi tiền**, dùng site Netlify đang có, phát triển dựa trên nhu cầu thực.
 
-Yêu cầu vận hành mới: gom cả đợt thay đổi và kiểm tra local trước khi deploy để giữ quota. Đợt 30/09 có candidate local, **không deploy Netlify**. [Quy trình release](RELEASE-POLICY.md).
+Yêu cầu vận hành mới: gom cả đợt thay đổi và kiểm tra local trước khi deploy để giữ quota. Chủ site đã cho phép phát hành đợt UI ngày 30/09: một production deploy sau QA/CI. [Quy trình release](RELEASE-POLICY.md).
 
 ## Quyết định về tên, URL và ngôn ngữ
 
@@ -60,12 +60,13 @@ Không đặt forecast doanh thu, ranking hoặc người dùng khi chưa có d�
 - Kiểm tra production sau deploy, bao gồm 404, redirect, canonical, sitemap và preset.
 - Docker runtime/routes/auth/restart và WebKit với iPhone emulation đã pass ngày 30/09. Safari/iOS thật chưa có thiết bị để xác minh; không ghi đã pass hardware.
 
-## Trạng thái cuối đợt local 30/09/2026
+## Trạng thái đợt UI 30/09/2026 trước publish
 
 | Hạng mục | Trạng thái | Bằng chứng / bước tiếp theo |
 |---|---|---|
 | 5 tác vụ × Việt/Anh, static SEO, tên/URL | Hoàn thành, đang live | Giữ 14 URL ổn định |
 | Search Console và sitemap | Hoàn thành thiết lập | Sitemap Success, phát hiện 14 URL |
+| UI desktop/mobile | Hoàn thành local | Dropdown borderless, navigation 5 tác vụ, kết quả dạng hàng, copy không em dash; 14 routes không overflow ở 360 px |
 | TIFF orientation | Sửa xong, giữ local | 8/8 orientation pass pixel/dimension trên Chrome và WebKit |
 | Docker | Sửa xong, giữ local | CRLF được normalize; routes/auth/restart pass |
 | Browser QA bổ sung | Hoàn thành local | JPG 200 KB, quality mode, WebP resize, download/ZIP, locale, HEIC, ICO, offline |
