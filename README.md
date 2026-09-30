@@ -47,7 +47,7 @@ Alternatively, run `docker compose up --build -d` and visit `http://localhost:34
 
 Keep changes local until the release plan and QA are complete. `npm run check` runs automated checks and validates the production build without deploying. After committing, `npm run release:prepare` creates a local candidate with file checksums under ignored `.netlify/release-candidates/`.
 
-GitHub CI verifies local browser flows, TIFF orientation and Docker on a standard public-repository runner. It has no Netlify deployment step. Production is deliberately held during the current quota-saving period; see [release policy](docs/RELEASE-POLICY.md).
+GitHub CI verifies local browser flows, TIFF orientation and Docker on a standard public-repository runner. It has no Netlify deployment step. Publish one production release after the batch passes QA and the owner authorizes deployment; see [release policy](docs/RELEASE-POLICY.md).
 
 ## Verification and license
 

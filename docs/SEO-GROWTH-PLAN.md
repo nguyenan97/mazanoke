@@ -66,12 +66,12 @@ Không đặt forecast doanh thu, ranking hoặc người dùng khi chưa có d�
 |---|---|---|
 | 5 tác vụ × Việt/Anh, static SEO, tên/URL | Hoàn thành, đang live | Giữ 14 URL ổn định |
 | Search Console và sitemap | Hoàn thành thiết lập | Sitemap Success, phát hiện 14 URL |
-| UI desktop/mobile | Hoàn thành local | Dropdown borderless, navigation 5 tác vụ, kết quả dạng hàng, copy không em dash; 14 routes không overflow ở 360 px |
+| UI desktop/mobile | Hoàn thành, commit/push, CI pass; chờ publish | Dropdown borderless, navigation 5 tác vụ, kết quả dạng hàng, copy không em dash; 14 routes không overflow ở 360 px |
 | TIFF orientation | Sửa xong, giữ local | 8/8 orientation pass pixel/dimension trên Chrome và WebKit |
 | Docker | Sửa xong, giữ local | CRLF được normalize; routes/auth/restart pass |
 | Browser QA bổ sung | Hoàn thành local | JPG 200 KB, quality mode, WebP resize, download/ZIP, locale, HEIC, ICO, offline |
 | Demo và draft phân phối | Chuẩn bị xong | `LAUNCH-KIT.md` và screenshot README; chưa đăng |
-| Release theo đợt | Hoàn thành, CI pass | `npm run check`, CI không deploy, `release:prepare` tạo candidate có checksum; CI run 36723499637 success |
+| Release theo đợt | Candidate sẵn sàng, publish chưa thành công | CI run 36727499058 success; candidate checksum pass. Plugin upload HTTP 500; CLI cần owner đăng nhập/authorize |
 | Google crawl/index và dữ liệu quốc gia/query | Chờ bên ngoài | Homepage Discovered - currently not indexed ở lần review; chưa suy diễn nhu cầu riêng của site |
 | Resize/PNG→JPG page hoặc ngôn ngữ thứ ba | Backlog có điều kiện | Chỉ mở khi dữ liệu hoặc phản hồi hỗ trợ |
 | Safari/iOS hardware | Chưa xác minh | Cần thiết bị thật, WebKit emulation không thay thế |

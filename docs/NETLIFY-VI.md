@@ -7,12 +7,21 @@
 - Team `nguyenan6197`, Free được kiểm tra lại ngày 30/09/2026.
 - Build: `node scripts/build-netlify.mjs`; publish: `dist`; Node trên Netlify: 22.
 - Bản review ngày 28/09/2026 đã publish: deploy `6aba77db68c13400d1c0ae8e`, version `1f6966c8046c`.
+- UI mới: commit `028bee1`, version `48ef738bb1d5`, [CI pass](https://github.com/nguyenan97/mazanoke/actions/runs/36727499058), chưa live. Plugin upload lỗi HTTP 500; cần authorize Netlify CLI để publish candidate đã kiểm tra.
 
 ## Deploy
 
 **Quy định ngày 30/09/2026:** hoàn tất cả đợt thay đổi và QA local rồi mới gom một lần deploy. Chủ site đã cho phép publish đợt UI sau QA/CI; không tạo preview deploy. Xem [RELEASE-POLICY.md](RELEASE-POLICY.md). GitHub CI chỉ kiểm tra local.
 
 Tái sử dụng project trên. Netlify plugin upload source và chạy build trên Netlify. **Chưa liên kết GitHub continuous deployment**: push repo không tự cập nhật production. Nếu bật sau này, liên kết `nguyenan97/mazanoke` vào project hiện tại; không tạo project trùng.
+
+Fallback khi plugin upload lỗi: owner chạy/authorize `npx netlify-cli login`, kiểm tra `npx netlify-cli status`, rồi dùng candidate đã QA:
+
+```sh
+npx netlify-cli deploy --prod --no-build --context production --site 190d2047-b9db-4f47-ba7e-519f696cfefd --dir .netlify/release-candidates/48ef738bb1d5-028bee1/public
+```
+
+Lệnh này publish một lần lên site hiện có, không chạy lại build hoặc tạo preview. Không dùng `--allow-anonymous`, `--create-site` hoặc token trong repository.
 
 Build không cần install runtime dependencies. `CONTEXT=production` tạo bản indexable; preview/local có noindex. Canonical origin lấy theo thứ tự `SITE_URL`, `URL` của Netlify, `config/site.json`. Luôn dùng origin production cho canonical, không dùng deploy-preview hostname.
 

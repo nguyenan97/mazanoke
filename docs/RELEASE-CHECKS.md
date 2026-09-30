@@ -92,3 +92,11 @@ The first source upload returned a Netlify server 500. A second upload containin
 - TIFF orientations 1–8 passed again in both browsers. WebKit passed HEIC 1280 × 854, valid ICO and offline navigation/conversion again.
 - Inspected new desktop Vietnamese, mobile English and dark mobile screenshots. All 14 routes fit a 360 px viewport. Keyboard ArrowUp/Tab changes compression mode and hides the unused target; all three selects have computed border `0px`, shadow `none` and appearance `none`.
 - Owner authorized one production deployment after QA/CI. This section records local results only; publish and production results will be recorded after they succeed.
+
+## Publish attempt, 2026-09-30
+
+- Source commit `028bee1048b84b6eb81a2ca3f19df9966151ccfc` is pushed to `main`. [CI run 36727499058](https://github.com/nguyenan97/mazanoke/actions/runs/36727499058) completed successfully, including browser/TIFF and Docker smoke.
+- Immutable candidate `48ef738bb1d5-028bee1` contains 43 files / 4,064,665 bytes. Every file matches the recorded SHA-256 and byte size.
+- Netlify MCP source upload returned HTTP 500 twice, including a fresh staging directory with only 30 required source files. Neither attempt returned a deploy ID. Do not count these attempts as successful production releases or assume a quota error from the 500 response.
+- Production was rechecked and still serves application version `1f6966c8046c`, deploy `6aba77db68c13400d1c0ae8e`.
+- Netlify CLI is available but reports `Not logged in`; the dashboard browser also reports Unauthorized. Opened CLI authorization for the owner. Direct CLI deploy can use the verified candidate with `--no-build` once authentication succeeds; no paid plan or extra preview is needed.

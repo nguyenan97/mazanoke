@@ -22,4 +22,4 @@ Không có account, database, upload API, analytics hoặc quảng cáo. Search 
 
 Giữ site Netlify Free hiện tại và URL ổn định. Git push chưa tự deploy vì continuous deployment chưa liên kết. Không tạo project mới. Xem [NETLIFY-VI.md](NETLIFY-VI.md) và [RELEASE-CHECKS.md](RELEASE-CHECKS.md).
 
-Ngày 30/09 bổ sung quy trình release theo đợt: local checks, browser QA, GitHub CI miễn phí và candidate có checksum. Chủ site đã cho phép publish đợt UI một lần sau QA/CI. UI mới, TIFF orientation và Docker CRLF đã pass local; kết quả production sẽ ghi riêng sau publish. [Release policy](RELEASE-POLICY.md), [demo và draft chia sẻ](LAUNCH-KIT.md).
+Ngày 30/09 bổ sung quy trình release theo đợt: local checks, browser QA, GitHub CI miễn phí và candidate có checksum. UI mới cùng TIFF/Docker fixes ở commit `028bee1` đã push và CI pass. Chủ site đã cho phép publish một lần, nhưng plugin upload lỗi HTTP 500; CLI cần owner đăng nhập/authorize. Production còn bản cũ; candidate `48ef738bb1d5-028bee1` đã xác minh checksum và có thể deploy trực tiếp với `--no-build`. [Release policy](RELEASE-POLICY.md), [demo và draft chia sẻ](LAUNCH-KIT.md).
