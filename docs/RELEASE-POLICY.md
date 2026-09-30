@@ -22,6 +22,7 @@ Không đặt mục tiêu số lần deploy theo một quota giả định. Khô
 
 - Production hiện tại: version `1f6966c8046c`, deploy `6aba77db68c13400d1c0ae8e` ngày 28/09/2026.
 - Candidate tiếp theo: sửa TIFF orientation và Docker CRLF; đã kiểm tra local, giữ lại chưa publish.
+- Application version của candidate: `64363715005d`, 43 files / 4,064,985 bytes. Chọn folder theo commit mới nhất đã hoàn tất QA; `release.json` ghi revision chính xác. [CI đã pass](https://github.com/nguyenan97/mazanoke/actions/runs/36723499637).
 - Demo/screenshots và tài liệu vận hành chỉ ở GitHub; static generator không đưa chúng vào bundle.
 - Safari/iOS thật chưa có thiết bị để kiểm tra. WebKit trên Windows với iPhone emulation là bằng chứng bổ sung, không được ghi thành đã pass thiết bị iPhone thật.
 

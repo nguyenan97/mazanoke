@@ -70,7 +70,7 @@ Không đặt forecast doanh thu, ranking hoặc người dùng khi chưa có d�
 | Docker | Sửa xong, giữ local | CRLF được normalize; routes/auth/restart pass |
 | Browser QA bổ sung | Hoàn thành local | JPG 200 KB, quality mode, WebP resize, download/ZIP, locale, HEIC, ICO, offline |
 | Demo và draft phân phối | Chuẩn bị xong | `LAUNCH-KIT.md` và screenshot README; chưa đăng |
-| Release theo đợt | Đã triển khai | `npm run check`, CI không deploy, `release:prepare` tạo candidate có checksum |
+| Release theo đợt | Hoàn thành, CI pass | `npm run check`, CI không deploy, `release:prepare` tạo candidate có checksum; CI run 36723499637 success |
 | Google crawl/index và dữ liệu quốc gia/query | Chờ bên ngoài | Homepage Discovered - currently not indexed ở lần review; chưa suy diễn nhu cầu riêng của site |
 | Resize/PNG→JPG page hoặc ngôn ngữ thứ ba | Backlog có điều kiện | Chỉ mở khi dữ liệu hoặc phản hồi hỗ trợ |
 | Safari/iOS hardware | Chưa xác minh | Cần thiết bị thật, WebKit emulation không thay thế |
