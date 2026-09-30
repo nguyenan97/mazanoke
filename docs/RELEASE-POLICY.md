@@ -20,10 +20,11 @@ Không đặt mục tiêu số lần deploy theo một quota giả định. Khô
 
 ## Candidate và production là hai trạng thái riêng
 
-- Production hiện tại: version `1f6966c8046c`, deploy `6aba77db68c13400d1c0ae8e` ngày 28/09/2026.
+- Production hiện tại: version `48ef738bb1d5`, deploy `6abd1f76eaf01a3a10519b18` ngày 30/09/2026, source commit `028bee1`.
 - Candidate cũ `64363715005d` gồm TIFF orientation và Docker CRLF đã pass [CI](https://github.com/nguyenan97/mazanoke/actions/runs/36723499637); được thay bằng đợt UI mới.
 - Application version đợt UI: `48ef738bb1d5`. Dropdown borderless, navigation theo tác vụ, kết quả dạng hàng, copy trực tiếp và theme trung tính. Bao gồm các sửa lỗi TIFF/Docker trước đó. Chọn folder theo commit mới nhất đã hoàn tất QA; `release.json` ghi revision chính xác.
-- Commit UI `028bee1` đã push, [CI mới pass](https://github.com/nguyenan97/mazanoke/actions/runs/36727499058). Candidate `48ef738bb1d5-028bee1`: 43 files / 4.064.665 bytes, checksum đã xác minh. Upload qua plugin gặp HTTP 500; production vẫn bản cũ. Đang cần owner đăng nhập/authorize CLI để deploy trực tiếp với `--no-build`.
+- Commit UI `028bee1` đã push, [CI mới pass](https://github.com/nguyenan97/mazanoke/actions/runs/36727499058). Candidate `48ef738bb1d5-028bee1`: 43 files / 4.064.665 bytes, checksum đã xác minh. Sau lỗi HTTP 500 của plugin, owner Authorize CLI; publish trực tiếp candidate với `--no-build` thành công. Một production release mới, không có preview hoặc Netlify build.
+- HTTP/SEO và browser QA trên production đã pass. Dashboard sau publish hiển thị 224,4/300 credits còn lại, Free $0; chu kỳ 26/09–25/10, credits hết hạn 26/10. Số Usage có thể cập nhật chậm và phải kiểm tra lại ở đợt sau.
 - Demo/screenshots và tài liệu vận hành chỉ ở GitHub; static generator không đưa chúng vào bundle.
 - Safari/iOS thật chưa có thiết bị để kiểm tra. WebKit trên Windows với iPhone emulation là bằng chứng bổ sung, không được ghi thành đã pass thiết bị iPhone thật.
 

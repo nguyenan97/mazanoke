@@ -6,8 +6,8 @@
 - Site ID: `190d2047-b9db-4f47-ba7e-519f696cfefd`
 - Team `nguyenan6197`, Free được kiểm tra lại ngày 30/09/2026.
 - Build: `node scripts/build-netlify.mjs`; publish: `dist`; Node trên Netlify: 22.
-- Bản review ngày 28/09/2026 đã publish: deploy `6aba77db68c13400d1c0ae8e`, version `1f6966c8046c`.
-- UI mới: commit `028bee1`, version `48ef738bb1d5`, [CI pass](https://github.com/nguyenan97/mazanoke/actions/runs/36727499058), chưa live. Plugin upload lỗi HTTP 500; cần authorize Netlify CLI để publish candidate đã kiểm tra.
+- Production ngày 30/09/2026: deploy `6abd1f76eaf01a3a10519b18`, version `48ef738bb1d5`, source commit `028bee1`. [Deployment record](https://app.netlify.com/projects/anh-gon-vn/deploys/6abd1f76eaf01a3a10519b18), [CI pass](https://github.com/nguyenan97/mazanoke/actions/runs/36727499058).
+- Publish bằng Netlify CLI với candidate đã QA và `--no-build`; plugin source upload lỗi HTTP 500. Deploy ready/published, không có build ID, Functions hay Edge Functions.
 
 ## Deploy
 
@@ -18,10 +18,12 @@ Tái sử dụng project trên. Netlify plugin upload source và chạy build tr
 Fallback khi plugin upload lỗi: owner chạy/authorize `npx netlify-cli login`, kiểm tra `npx netlify-cli status`, rồi dùng candidate đã QA:
 
 ```sh
-npx netlify-cli deploy --prod --no-build --context production --site 190d2047-b9db-4f47-ba7e-519f696cfefd --dir .netlify/release-candidates/48ef738bb1d5-028bee1/public
+npx netlify-cli deploy --prod --no-build --site 190d2047-b9db-4f47-ba7e-519f696cfefd --dir .netlify/release-candidates/48ef738bb1d5-028bee1/public
 ```
 
 Lệnh này publish một lần lên site hiện có, không chạy lại build hoặc tạo preview. Không dùng `--allow-anonymous`, `--create-site` hoặc token trong repository.
+
+Không kết hợp `--context` với `--no-build`: CLI từ chối trước khi deploy. Candidate phải đã được build theo production trước đó. Nếu login thường bị timeout sau khi owner đã Authorize, dùng `netlify login --check <ticket-id>` để hoàn tất session, rồi kiểm tra lại đúng tài khoản/site bằng `status`.
 
 Build không cần install runtime dependencies. `CONTEXT=production` tạo bản indexable; preview/local có noindex. Canonical origin lấy theo thứ tự `SITE_URL`, `URL` của Netlify, `config/site.json`. Luôn dùng origin production cho canonical, không dùng deploy-preview hostname.
 
@@ -53,5 +55,7 @@ Sitemap hợp lệ hoặc thông báo submit thành công không đảm bảo Go
 ## Giữ chi phí 0
 
 Không bật paid upgrade, auto recharge, Functions, paid analytics, paid API hay mua domain. Xem Usage trên dashboard; Free có quota và site có thể bị pause khi hết quota. Không có image uploads lên server, chỉ static assets/codecs/fonts.
+
+Dashboard sau publish ngày 30/09 hiển thị **224,4/300 credits còn lại**, tổng đã dùng 75,6 credits; 5 production deploys chiếm 75 credits. Chu kỳ hiện tại **26/09–25/10**, credits hết hạn 26/10, không phải reset vào đầu tháng dương lịch. Usage có thể cập nhật chậm vài phút. Đây là số quan sát tại thời điểm review, không phải cam kết quota cho các lần deploy sau. Gói vẫn $0, không lưu credit card.
 
 Sau mỗi deploy kiểm tra root, English, 200 KB, HEIC, WebP→JPG, sitemap/robots, real 404 và redirect `/index.html`. Các bước và kết quả gần nhất ở [RELEASE-CHECKS.md](RELEASE-CHECKS.md).
