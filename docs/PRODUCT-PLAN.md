@@ -16,7 +16,7 @@ Công cụ image compression/conversion miễn phí bằng Vietnamese và Englis
 
 `content/pages.mjs` quản lý route/nội dung/preset, `locales/` quản lý UI strings, `config/site.json` quản lý brand/origin. Build sinh `dist`, không sửa trực tiếp output. Các script legacy upstream vẫn được giữ trong repository để tham chiếu, không được ship bởi build mới.
 
-Không có account, database, upload API, analytics hoặc quảng cáo. Search Console cần chủ site xác minh Google; chưa có số liệu usage riêng của AnhGon.
+Không có account, database, upload API, analytics hoặc quảng cáo. Search Console đã xác minh quyền sở hữu ngày 28/09/2026; review 30/09 xác nhận sitemap Success và 14 URL được phát hiện. Trang chủ chưa được index; chưa có số liệu usage riêng của AnhGon.
 
 ## Vận hành
 

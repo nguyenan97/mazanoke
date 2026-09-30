@@ -42,3 +42,14 @@ test('ICO directory points to the embedded PNG and encodes 256 px as zero', asyn
   assert.equal(data.getUint32(14, true), 4); assert.equal(data.getUint32(18, true), 22);
   assert.throws(() => encodeIco(png, 512, 512));
 });
+
+test('clearing an unused target cannot block quality mode, but target mode remains strict', () => {
+  const settings = { mode:'quality', target:0, unit:'KB', quality:80, maxDimension:0, format:'image/jpeg', allowResize:false };
+  for (const target of [0, '', NaN, 0.1, 200000]) {
+    const normalized = validateSettings({ ...settings, target });
+    assert.equal(normalized.target, 200);
+    assert.equal(normalized.targetBytes, 200000);
+    assert.throws(() => validateSettings({ ...settings, mode:'target', target }));
+  }
+  assert.equal(validateSettings({ ...settings, target:0.5, unit:'MB' }).targetBytes, 500000);
+});

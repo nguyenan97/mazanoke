@@ -12,9 +12,14 @@ test('preview is crawlable so noindex can be read, then production is indexable'
   assert.match(read('en/index.html'), /name="robots" content="noindex, follow"/);
   assert.match(read('_headers'), /X-Robots-Tag: noindex/);
   assert.doesNotMatch(read('robots.txt'), /Disallow: \//);
+  assert.doesNotMatch(read('index.html'), /name="google-site-verification"/);
   build('production');
   assert.match(read('en/index.html'), /name="robots" content="index, follow"/);
   assert.doesNotMatch(read('_headers'), /X-Robots-Tag/);
+  const site = JSON.parse(readFileSync(path.join(root, 'config/site.json'), 'utf8'));
+  const token = process.env.GOOGLE_SITE_VERIFICATION || site.googleSiteVerification;
+  if (token) assert.ok(read('index.html').includes(`name="google-site-verification" content="${token}"`));
+  assert.doesNotMatch(read('en/index.html'), /name="google-site-verification"/);
 });
 test('all fourteen generated pages have unique canonical and bidirectional alternates', () => {
   const report = JSON.parse(read('build-report.json'));

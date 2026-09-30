@@ -32,9 +32,15 @@ export function uniqueRecords(records) {
   });
 }
 export function validateSettings(settings) {
-  const bytes = targetBytes(settings.target, settings.unit);
+  let target = Number(settings.target), unit = settings.unit, bytes;
+  try { bytes = targetBytes(target, unit); } catch { bytes = NaN; }
+  // An unused, hidden target must not block quality-based compression.
+  if (settings.mode === 'quality' && (!Number.isFinite(bytes) || bytes < 1000 || bytes > 100000000)) {
+    target = 200; unit = 'KB'; bytes = 200000;
+  }
   if (!['quality', 'target'].includes(settings.mode) || !['auto','image/jpeg','image/png','image/webp','image/x-icon'].includes(settings.format) || !Number.isFinite(settings.quality) || settings.quality < 1 || settings.quality > 100 || bytes < 1000 || bytes > 100000000 || !Number.isInteger(settings.maxDimension) || settings.maxDimension < 0 || settings.maxDimension > 8000) throw new Error('invalidSettings');
-  return { ...settings, targetBytes: bytes };
+  if (!Number.isFinite(bytes)) throw new Error('invalidSettings');
+  return { ...settings, target, unit, targetBytes: bytes };
 }
 export function encodeIco(png, width, height) {
   if (!width || !height || width > 256 || height > 256) throw new Error('invalidSettings');

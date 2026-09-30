@@ -6,7 +6,7 @@
 - Site ID: `190d2047-b9db-4f47-ba7e-519f696cfefd`
 - Team `nguyenan6197`, Free được kiểm tra ngày 27/09/2026.
 - Build: `node scripts/build-netlify.mjs`; publish: `dist`; Node trên Netlify: 22.
-- Bản đa ngôn ngữ đã publish và kiểm tra ngày 27/09/2026: deploy `6ab9409fb245cdabc96dc47d`, version `c87034776468`.
+- Bản review ngày 28/09/2026 đã publish: deploy `6aba77db68c13400d1c0ae8e`, version `1f6966c8046c`.
 
 ## Deploy
 
@@ -28,12 +28,16 @@ Mở `http://127.0.0.1:4173`. `index.html` trong source là template, không m�
 
 ## Search Console miễn phí
 
+Property HTTPS đã được Google xác minh bằng HTML tag ngày 28/09/2026. Mã công khai được lưu trong `config/site.json`; không xóa mã này khi deploy. Review ngày 30/09/2026: sitemap báo **Success**, đọc gần nhất ngày 29/09 và phát hiện đủ **14 URL**. Google Live Test fetch thành công. Trang chủ còn **Discovered - currently not indexed**; yêu cầu index thủ công bị từ chối do daily quota. Kết quả đầy đủ nằm trong [RELEASE-CHECKS.md](RELEASE-CHECKS.md).
+
+Các bước dưới dành cho việc thiết lập lại hoặc quản lý property:
+
 1. Đăng nhập [Search Console](https://search.google.com/search-console/), tạo **URL-prefix** property `https://anh-gon-vn.netlify.app/`.
 2. Chọn HTML tag, lấy riêng giá trị `content` của `google-site-verification`. Đây là mã xác minh công khai, không phải mật khẩu.
 3. Đặt `GOOGLE_SITE_VERIFICATION` trong build environment hoặc `googleSiteVerification` trong `config/site.json`; redeploy.
 4. Verify rồi submit `https://anh-gon-vn.netlify.app/sitemap.xml`.
 
-Đăng nhập Google là bước của chủ tài khoản. Không đánh dấu hoàn tất xác minh/indexing nếu chưa được Google xác nhận. Sitemap hợp lệ không đảm bảo tất cả URL được index.
+Sitemap hợp lệ hoặc thông báo submit thành công không đảm bảo Google đã đọc sitemap hay index tất cả URL. Đọc trạng thái fetch riêng với báo cáo Page indexing.
 
 ## Giữ chi phí 0
 

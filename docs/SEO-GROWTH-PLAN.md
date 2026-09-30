@@ -1,6 +1,6 @@
 # Ảnh Gọn / AnhGon — kế hoạch tăng trưởng miễn phí
 
-Cập nhật 27/09/2026. Kế hoạch này thay thế đề xuất mua custom domain và đặt English ở root. Ràng buộc hiện tại: **không chi tiền**, dùng site Netlify đang có, phát triển dựa trên nhu cầu thực.
+Cập nhật 30/09/2026. Kế hoạch này thay thế đề xuất mua custom domain và đặt English ở root. Ràng buộc hiện tại: **không chi tiền**, dùng site Netlify đang có, phát triển dựa trên nhu cầu thực.
 
 ## Quyết định về tên, URL và ngôn ngữ
 
@@ -40,7 +40,9 @@ Free hosting vẫn có quota. Netlify Free có hard limit và có thể pause si
 
 ## Bước tiếp theo và tiêu chí quyết định
 
-1. **Search Console:** chủ site đăng nhập Google; tạo URL-prefix property cho đúng HTTPS origin; lấy HTML verification tag. Build hỗ trợ `GOOGLE_SITE_VERIFICATION` hoặc `googleSiteVerification` trong `config/site.json`. Deploy, Verify rồi gửi `/sitemap.xml`. Không cần mua domain. [Google verification](https://support.google.com/webmasters/answer/9008080?hl=en).
+Baseline review 30/09: Search Console Performance hiện hiển thị 0 clicks, 0 impressions và Queries chưa có dữ liệu; chart mới có ngày 27/09. Chưa đủ dữ liệu để chọn quốc gia hoặc ngôn ngữ bổ sung. Sitemap đã được đọc thành công; ưu tiên kế tiếp là Google crawl/index các trang hiện có. Số liệu này chỉ phản ánh Google Search, không đo direct traffic hay lượt xử lý ảnh.
+
+1. **Search Console:** đã xác minh URL-prefix property bằng HTML tag và submit `/sitemap.xml` ngày 28/09/2026. Review 30/09: sitemap **Success**, phát hiện đủ 14 URL; Google Live Test fetch thành công. Trang chủ **Discovered - currently not indexed**; một yêu cầu index thủ công bị từ chối vì daily quota. Chờ Google crawl/index và dùng Page indexing để chẩn đoán khi có dữ liệu, không submit lặp lại. Token được giữ trong `config/site.json`. Không cần mua domain. Chi tiết trong `RELEASE-CHECKS.md`. [Google verification](https://support.google.com/webmasters/answer/9008080?hl=en).
 2. **Sau khi có dữ liệu:** xem index status, query, country, device, impression, click, CTR theo page và locale. Search Console không đo số lượt xử lý ảnh hoặc tỷ lệ download; hiện chưa có telemetry nên không suy diễn conversion rate.
 3. **Mỗi lần đánh giá 28 ngày:** ưu tiên page có impression và query đúng ý định nhưng CTR thấp để sửa title/description; page đã có click nhưng hướng dẫn thiếu thì bổ sung ví dụ thật. Page chưa được index cần kiểm tra lý do trước khi thêm page mới. Lịch này là hướng dẫn vận hành, chưa tạo automation.
 4. **Nội dung kế tiếp:** resize và PNG→JPG là backlog. Chỉ thêm khi query/review cho thấy nhu cầu và có nội dung riêng. 50/100 KB dùng chung ô mục tiêu trước; không tạo hàng loạt trang chỉ thay con số.
