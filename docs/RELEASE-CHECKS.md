@@ -77,5 +77,6 @@ The first source upload returned a Netlify server 500. A second upload containin
 - Docker smoke passed all 14 routes and assets, noindex for local instances, real 404, explicit index 301, optional Basic authentication covering HTML/robots/sitemap/JS, and authentication after restart. Disposable test containers were removed.
 - `npm run check` passes the 11 existing automated checks plus independent production-output checks for unique metadata, internal links, exact language pairs, sitemap, robots and redirect rules.
 - Added GitHub verification workflow for the public repo with standard Ubuntu runner, read-only contents permission, browser regression and Docker smoke. It has no Netlify credentials or deploy step.
+- First Ubuntu CI run exposed a Node 22 test-discovery incompatibility in `node --test tests`; the runner now enumerates explicit `.test.mjs` files consistently across Node versions and Windows/Linux shells.
 - Added local-only `release:prepare`: clean Git revision, successful checks, copied static files and SHA-256 manifest. Candidate stays under ignored `.netlify/release-candidates/`.
 - Prepared real sample screenshots and Vietnamese/English sharing drafts in `LAUNCH-KIT.md`; nothing was posted to external communities. Screenshot/build-size values are browser-specific observations.
