@@ -6,6 +6,8 @@ Local application `d7dc21e4217c`: 14/14 tests and all 14 generated routes passed
 
 Published once after [CI 37113478480 passed](https://github.com/nguyenan97/mazanoke/actions/runs/37113478480), source `c4b8c4d`, immutable candidate 48 files / 4,410,027 bytes with all checksums verified. Production deploy `6ac0cc5eacb1d8d33024b362` is ready; version `d7dc21e4217c`. **38/38 live HTTP/SEO checks passed.** Production mobile Lighthouse: Performance 99, SEO/Accessibility/Best Practices 100, LCP 1.6 s, TBT 0 ms, CLS 0.001. Live sample JPG 120.72 KB / 1200 × 800 and update/reload passed. No preview or remote build was created. Search Console was not resubmitted.
 
+Final cache correction removed a conflicting global Cache-Control in netlify.toml. **15/15 tests**, [CI 37113923038](https://github.com/nguyenan97/mazanoke/actions/runs/37113923038), and **39/39 live checks** passed. Current deploy `6ac0ce23f54ad5751fa4e941`, source `15e717f`, same application `d7dc21e4217c`. Assets/fonts now return max-age=31536000/immutable; HTML revalidates; worker no-cache. Final mobile Lighthouse: Performance 99, SEO/Accessibility/Best Practices 100, LCP 1.9 s, TBT 70 ms, CLS 0.003. This required one corrective production publish in addition to the initial release; no preview or build. [Full audit](SEO-AUDIT-2026-10-03.md).
+
 ## Local UI refresh, 2026-10-03
 
 - Application version `c9fe811b6d52` (Choices.js/range refinement after `918e09c2f3dd`), local preview at `http://127.0.0.1:4183/`. Production still serves `48ef738bb1d5`; this UI batch has not been deployed.
