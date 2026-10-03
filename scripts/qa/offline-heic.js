@@ -11,7 +11,7 @@ async (page) => {
   if (heic.type !== 'image/jpeg' || heic.width !== 1280 || heic.height !== 854) throw new Error('HEIC fixture failed');
   await page.locator('#clear').click();
   await page.getByRole('listbox', { name:'Output format', exact:true }).click();
-  await page.getByRole('option', { name:'ICO', exact:true }).click();
+  await page.locator('.choices__list--dropdown.is-active').getByRole('option', { name:'ICO', exact:true }).click();
   await page.locator('#sample').click();
   await page.locator('#notice').filter({ hasText:'Finished: 1 ready, 0 failed.' }).waitFor();
   const ico = await page.locator('.download-image').evaluate(async link => {

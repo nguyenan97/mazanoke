@@ -5,7 +5,7 @@ async (page) => {
   const origin = new URL(page.url()).origin;
   const select = async (label, option) => {
     await page.getByRole('listbox', { name:label, exact:true }).click();
-    await page.getByRole('option', { name:option, exact:true }).click();
+    await page.locator('.choices__list--dropdown.is-active').getByRole('option', { name:option, exact:true }).click();
   };
   await page.goto(origin + '/en/compress-image-to-200kb/');
   const ready = () => page.locator('#notice').filter({ hasText:'Finished: 1 ready, 0 failed.' }).waitFor();
