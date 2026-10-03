@@ -4,6 +4,8 @@
 
 Local application `d7dc21e4217c`: 14/14 tests and all 14 generated routes passed. Docker build/smoke passed. Browser confirmed matching JPG/WebP sample measurements, HEIC 1280 × 854, quality mode with an empty unused target, theme on info pages, service worker update/offline save and no overflow on 14 routes at 360 px. Lighthouse mobile local SEO/Accessibility/Best Practices 100; LCP 2.8 s versus 3.3 s before. Full results, TBT limitation and release status: [SEO audit](SEO-AUDIT-2026-10-03.md).
 
+Published once after [CI 37113478480 passed](https://github.com/nguyenan97/mazanoke/actions/runs/37113478480), source `c4b8c4d`, immutable candidate 48 files / 4,410,027 bytes with all checksums verified. Production deploy `6ac0cc5eacb1d8d33024b362` is ready; version `d7dc21e4217c`. **38/38 live HTTP/SEO checks passed.** Production mobile Lighthouse: Performance 99, SEO/Accessibility/Best Practices 100, LCP 1.6 s, TBT 0 ms, CLS 0.001. Live sample JPG 120.72 KB / 1200 × 800 and update/reload passed. No preview or remote build was created. Search Console was not resubmitted.
+
 ## Local UI refresh, 2026-10-03
 
 - Application version `c9fe811b6d52` (Choices.js/range refinement after `918e09c2f3dd`), local preview at `http://127.0.0.1:4183/`. Production still serves `48ef738bb1d5`; this UI batch has not been deployed.

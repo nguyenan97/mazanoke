@@ -99,3 +99,13 @@ test('initial asset budgets stay bounded and informational pages avoid the proce
     assert.match(html, /\/info\.css/);
   }
 });
+
+test('Netlify global headers cannot override the generated asset cache policy', () => {
+  const config = readFileSync(path.join(root, 'netlify.toml'), 'utf8');
+  const global = config.split('[[headers]]').find(block => /for\s*=\s*"\/\*"/.test(block));
+  assert.ok(global);
+  assert.doesNotMatch(global.replace(/^\s*#.*$/gm, ''), /Cache-Control\s*=/i);
+  const headers = read('_headers');
+  assert.match(headers, /\/assets\/app\/[a-f0-9]+\/\*\s+Cache-Control: public, max-age=31536000, immutable/);
+  assert.match(headers, /\/assets\/fonts\/\*\s+Cache-Control: public, max-age=31536000, immutable/);
+});

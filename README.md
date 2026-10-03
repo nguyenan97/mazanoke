@@ -21,6 +21,8 @@ This GPL-3.0 fork is built from [MAZANOKE by civilblur](https://github.com/civil
 - Static task guides and measured examples, contextual links, canonical/hreflang, WebPage/WebSite/breadcrumb structured data, sitemap, real 404 and noindex previews.
 - No image upload API, accounts, analytics, ads, database or paid service dependency.
 
+[SEO audit and production verification, 2026-10-03](docs/SEO-AUDIT-2026-10-03.md): all 14 routes validated; mobile Lighthouse Performance 99, SEO/Accessibility/Best Practices 100. These are lab checks, not indexing or ranking results.
+
 JPG uses a white background; EXIF is removed and animated inputs become still images. Results may exceed a target or become larger than the input. Limits: 50 files/batch, 50 MB/file, 40 megapixels decoded, 100 MB retained results, 75 MB ZIP input. Browser/device memory can impose lower practical limits.
 
 ## Development

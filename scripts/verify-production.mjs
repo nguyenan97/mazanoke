@@ -96,6 +96,18 @@ for (const asset of assets) await check(`asset ${asset}`, async () => {
   const response = await request(asset, { method: 'HEAD', redirect: 'manual' });
   assert.equal(response.status, 200);
   assert.doesNotMatch(response.headers.get('content-type') || '', /text\/html/i);
+  if (asset.startsWith('/assets/app/') || asset.startsWith('/assets/fonts/')) {
+    const cache = response.headers.get('cache-control') || '';
+    assert.match(cache, /max-age=31536000/);
+    assert.match(cache, /immutable/);
+    assert.doesNotMatch(cache, /max-age=0(?:\s|,|$)/);
+  }
+});
+await check('service worker freshness', async () => {
+  const response = await request('/service-worker.js');
+  assert.equal(response.status, 200);
+  assert.match(response.headers.get('cache-control') || '', /no-cache/);
+  assert.ok((await response.text()).includes(`const APP_VERSION = '${version}'`));
 });
 
 const checkedAt = new Date().toISOString();

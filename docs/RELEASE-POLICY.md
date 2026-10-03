@@ -20,6 +20,8 @@ Không đặt mục tiêu số lần deploy theo một quota giả định. Khô
 
 ## Candidate và production là hai trạng thái riêng
 
+**Cập nhật 03/10:** production hiện tại là `d7dc21e4217c`, deploy `6ac0cc5eacb1d8d33024b362`, source `c4b8c4d`. UI Pico/Choices, nội dung static, structured data và minify đã publish một lần sau CI/QA; 38 live checks pass. Candidate 48 files / 4.410.027 bytes đã xác minh checksum. Các bullet ngày 30/09 bên dưới là lịch sử release. [SEO audit và kết quả production](SEO-AUDIT-2026-10-03.md).
+
 - Production hiện tại: version `48ef738bb1d5`, deploy `6abd1f76eaf01a3a10519b18` ngày 30/09/2026, source commit `028bee1`.
 - Candidate cũ `64363715005d` gồm TIFF orientation và Docker CRLF đã pass [CI](https://github.com/nguyenan97/mazanoke/actions/runs/36723499637); được thay bằng đợt UI mới.
 - Application version đợt UI: `48ef738bb1d5`. Dropdown borderless, navigation theo tác vụ, kết quả dạng hàng, copy trực tiếp và theme trung tính. Bao gồm các sửa lỗi TIFF/Docker trước đó. Chọn folder theo commit mới nhất đã hoàn tất QA; `release.json` ghi revision chính xác.
