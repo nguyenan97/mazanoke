@@ -1,19 +1,24 @@
 import { formatBytes, targetBytes, validateSettings, uniqueRecords } from './core.js';
 import { loadCodec } from './codec-loader.js';
+import { icon } from './ui-icons.js';
+import Choices from './choices.js';
 const page = JSON.parse(document.getElementById('page-config').textContent);
 const $ = id => document.getElementById(id);
 const t = (key, values = {}) => Object.entries(values).reduce((text, [name, value]) => text.replaceAll(`{${name}}`, String(value)), page.messages[key] || key);
 let busy = false, zipping = false, controller, registration;
 let records = [];
+const selectControls = new Map();
 const defaults = { mode:'quality', quality:80, target:200, unit:'KB', format:'auto', maxDimension:0, allowResize:false };
 function message(key, values) { if ($('notice')) $('notice').textContent = t(key, values); }
 function controls() {
   if (!$('settings-fields')) return;
   $('settings-fields').disabled = busy;
+  for (const control of selectControls.values()) busy ? control.disable() : control.enable();
   $('cancel').hidden = !busy;
   $('zip').disabled = busy || zipping || records.length === 0;
   $('clear').disabled = busy || zipping || !$('results-list').children.length;
   $('sample').disabled = busy;
+  $('choose').disabled = busy || zipping;
   $('empty').hidden = $('results-list').children.length > 0;
   $('result-count').textContent = records.length ? ` (${records.length})` : '';
 }
@@ -28,7 +33,9 @@ function displaySettings(settings) {
 }
 function updateFields() {
   $('target-field').hidden = $('mode').value !== 'target';
-  $('quality-value').textContent = `${$('quality').value}%`;
+  const range = $('quality');
+  $('quality-value').textContent = `${range.value}%`;
+  range.style.setProperty('--range-fill', `${100 * (Number(range.value) - Number(range.min)) / (Number(range.max) - Number(range.min))}%`);
 }
 function addError(file, error) {
   const article = document.createElement('article'); article.className = 'result error-result';
@@ -52,14 +59,17 @@ function addResult(result) {
     note.textContent = result.blob.size <= result.target ? t('targetMet', { size:formatBytes(result.target, page.locale) }) : t('targetMissed');
     note.classList.toggle('warning', result.blob.size > result.target);
   } else {
-    const percent = (100 * (1 - result.blob.size / result.originalBytes)).toFixed(1);
+    const percent = new Intl.NumberFormat(page.locale, { minimumFractionDigits:1, maximumFractionDigits:1 }).format(100 * (1 - result.blob.size / result.originalBytes));
     note.textContent = result.blob.size < result.originalBytes ? t('saved', { percent }) : t(result.blob.size === result.originalBytes ? 'unchanged' : 'larger');
     note.classList.toggle('warning', result.blob.size > result.originalBytes);
   }
+  note.insertAdjacentHTML('afterbegin', icon(note.classList.contains('warning') ? 'circle-alert' : 'check'));
   text.append(name, meta, note);
   const actions = document.createElement('div'); actions.className = 'result-links';
-  const link = document.createElement('a'); link.href = result.url; link.download = result.name; link.textContent = t('download'); link.className = 'download-image';
-  const remove = document.createElement('button'); remove.type = 'button'; remove.className = 'text-button'; remove.textContent = t('remove');
+  const link = document.createElement('a'); link.href = result.url; link.download = result.name; link.className = 'download-image';
+  link.innerHTML = icon('download'); link.append(document.createTextNode(t('download')));
+  const remove = document.createElement('button'); remove.type = 'button'; remove.className = 'text-button'; remove.innerHTML = icon('trash-2'); remove.append(document.createTextNode(t('remove')));
+  remove.setAttribute('aria-label', `${t('remove')}: ${result.name}`);
   remove.addEventListener('click', () => { if (busy || zipping) return; release(result); records = records.filter(record => record.id !== result.id); article.remove(); controls(); });
   actions.append(link, remove); article.append(image, text, actions); $('results-list').append(article);
 }
@@ -143,21 +153,26 @@ async function sample() {
   if (blob) await run([new File([blob], 'anhgon-sample.png', { type:'image/png' })]);
 }
 
-$('theme').addEventListener('click', () => {
-  const dark = document.documentElement.dataset.theme !== 'dark'; document.documentElement.dataset.theme = dark ? 'dark' : 'light';
-  try { localStorage.setItem('anhgon-theme', dark ? 'theme-dark' : 'theme-light'); } catch {}
-});
 if ($('files')) {
   let saved = {};
   try { saved = validateSettings(JSON.parse(localStorage.getItem('anhgon-settings-v2'))); } catch {}
   displaySettings({ ...defaults, ...saved, ...page.preset });
+  for (const id of ['mode', 'unit', 'format']) {
+    const select = $(id), label = select.labels?.[0];
+    if (label) label.id = `${id}-label`;
+    const control = new Choices(select, { searchEnabled:false, shouldSort:false, itemSelectText:'', allowHTML:false, labelId:label?.id || '', position:'auto' });
+    selectControls.set(id, control);
+    const container = select.closest('.choices');
+    container.dataset.control = id;
+    if (!label) container.setAttribute('aria-label', select.getAttribute('aria-label'));
+  }
   let previousUnit = $('unit').value;
   $('unit').addEventListener('change', () => {
     try {
       const bytes = targetBytes($('target').value, previousUnit);
       $('target').value = bytes / ($('unit').value === 'KB' ? 1000 : 1000000);
       previousUnit = $('unit').value;
-    } catch { $('unit').value = previousUnit; message('invalidSettings'); }
+    } catch { selectControls.get('unit').setChoiceByValue(previousUnit); message('invalidSettings'); }
   });
   $('settings-form').addEventListener('input', () => { updateFields(); });
   $('settings-form').addEventListener('change', () => { updateFields(); try { localStorage.setItem('anhgon-settings-v2', JSON.stringify(readSettings())); } catch {} });

@@ -16,3 +16,4 @@ dist/
 node_modules/
 .playwright-cli/
 output/playwright/
+output/verification/

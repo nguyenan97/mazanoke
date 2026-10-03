@@ -4,6 +4,8 @@ Công cụ image compression/conversion miễn phí bằng Vietnamese và Englis
 
 ## Sản phẩm hiện tại
 
+UI batch ngày 03/10 đã hoàn thiện ở local preview: Pico CSS 2.1.1, Choices.js 11.2.4 cho dropdown, Lucide SVG, slider có track fill theo giá trị, nền sáng, card nhẹ, xanh lá và responsive mobile/tablet. QA ghi ở [RELEASE-CHECKS.md](RELEASE-CHECKS.md). Chưa deploy batch này; production vẫn là `48ef738bb1d5`.
+
 - 5 tác vụ × 2 ngôn ngữ, cùng About/Privacy cho mỗi ngôn ngữ.
 - 200 KB tính bằng 200.000 bytes; hiển thị đạt/chưa đạt theo blob thật. Cho phép người dùng chọn giảm pixel để đạt mục tiêu.
 - Batch tối đa 50 file, 50 MB/file và giới hạn ảnh decode 40 megapixel; xử lý lần lượt. Lỗi một file không làm hỏng các file còn lại.
@@ -16,7 +18,7 @@ Công cụ image compression/conversion miễn phí bằng Vietnamese và Englis
 
 `content/pages.mjs` quản lý route/nội dung/preset, `locales/` quản lý UI strings, `config/site.json` quản lý brand/origin. Build sinh `dist`, không sửa trực tiếp output. Các script legacy upstream vẫn được giữ trong repository để tham chiếu, không được ship bởi build mới.
 
-Không có account, database, upload API, analytics hoặc quảng cáo. Search Console đã xác minh quyền sở hữu ngày 28/09/2026; review 30/09 xác nhận sitemap Success và 14 URL được phát hiện. Trang chủ chưa được index; chưa có số liệu usage riêng của AnhGon.
+Không có account, database, upload API, analytics hoặc quảng cáo. Search Console đã xác minh quyền sở hữu ngày 28/09/2026; review 03/10 xác nhận sitemap Success, last read 02/10 và 14 URL được phát hiện. Homepage Việt/Anh chưa được index; homepage Việt đã được Google nhận Request indexing sau Live Test thành công. Performance vẫn 0 clicks/0 impressions; chưa có số liệu usage riêng của AnhGon. [Review mới nhất](REVIEW-2026-10-03.md).
 
 ## Vận hành
 

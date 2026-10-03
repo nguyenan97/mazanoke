@@ -70,3 +70,31 @@ MAZANOKE would not be possible without the projects listed here.
 # Vietnamese edition
 
 - Inter Variable 5.3.0, by Rasmus Andersson and contributors, distributed through `@fontsource-variable/inter`. SIL Open Font License 1.1: `assets/fonts/inter/LICENSE`. Latin, Latin Extended and Vietnamese subsets are self-hosted.
+
+### Pico CSS
+
+- **Author:** Lucas Larroche and contributors
+- **Version:** 2.1.1
+- **Source:** [Pico CSS](https://github.com/picocss/pico)
+- **License:** MIT; preserved in `assets/vendor/PICO-LICENSE.md`, published at `/assets/licenses/PICO-LICENSE.md`.
+- **Usage:** Self-hosted CSS foundation for native controls, forms and accordions. Selected Sass modules are compiled and minified at build time; informational pages omit Choices CSS. No runtime CDN dependency.
+
+### Lucide
+
+- **Author:** Lucide Icons and Contributors; Feather-derived icons by Cole Bemis
+- **Version:** `lucide-static` 1.51.0
+- **Source:** [Lucide](https://github.com/lucide-icons/lucide)
+- **License:** ISC / MIT; preserved in `assets/vendor/lucide/LICENSE`, published at `/assets/licenses/LUCIDE-LICENSE`.
+- **Usage:** Selected SVG icons embedded into static HTML and the local `ui-icons.js` module. No icon runtime or remote requests.
+
+### Choices.js
+
+- **Author:** Josh Johnson and contributors
+- **Version:** 11.2.4, prefix-search ESM build
+- **Source:** [Choices.js](https://github.com/Choices-js/Choices)
+- **License:** MIT; preserved in `assets/vendor/CHOICES-LICENSE`, published at `/assets/licenses/CHOICES-LICENSE`.
+- **Usage:** Self-hosted single-select dropdowns for compression mode, units and output format, with keyboard navigation and local theme overrides. The preserved upstream ESM source is minified by esbuild during the static build.
+
+### Build tools
+
+- Sass 1.105.1 (MIT), esbuild 0.28.2 (MIT) and Pico 2.1.1 (MIT) are pinned in `package-lock.json`. These tools run during the build; Sass/esbuild are not shipped as browser runtime dependencies. [Sass source](https://github.com/sass/dart-sass), [esbuild source](https://github.com/evanw/esbuild).

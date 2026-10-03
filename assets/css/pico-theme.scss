@@ -1,0 +1,25 @@
+// Compile only the Pico modules used by the app; application overrides stay separate.
+@use "pico" with (
+  $theme-color: "green",
+  $enable-responsive-typography: false,
+  $modules: (
+    "layout/landmarks": false,
+    "layout/container": false,
+    "layout/grid": false,
+    "layout/overflow-auto": false,
+    "content/code": false,
+    "content/figure": false,
+    "content/misc": false,
+    "forms/input-color": false,
+    "forms/input-date": false,
+    "forms/input-file": false,
+    "forms/input-search": false,
+    "components/card": false,
+    "components/dropdown": false,
+    "components/group": false,
+    "components/loading": false,
+    "components/modal": false,
+    "components/nav": false,
+    "components/tooltip": false
+  )
+);

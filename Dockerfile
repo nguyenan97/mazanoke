@@ -1,6 +1,8 @@
 FROM node:22-alpine AS prepare
 WORKDIR /app
-COPY package.json index.html service-worker.js favicon.ico LICENSE ./
+COPY package.json package-lock.json ./
+RUN npm ci --no-audit --no-fund
+COPY index.html service-worker.js favicon.ico LICENSE ./
 COPY scripts/build-netlify.mjs ./scripts/build-netlify.mjs
 COPY config/site.json ./config/site.json
 COPY content ./content

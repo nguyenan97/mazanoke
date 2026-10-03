@@ -9,7 +9,9 @@ async (page) => {
     const result = { type:blob.type, width:image.width, height:image.height }; image.close(); return result;
   });
   if (heic.type !== 'image/jpeg' || heic.width !== 1280 || heic.height !== 854) throw new Error('HEIC fixture failed');
-  await page.locator('#clear').click(); await page.locator('#format').selectOption('image/x-icon');
+  await page.locator('#clear').click();
+  await page.getByRole('listbox', { name:'Output format', exact:true }).click();
+  await page.getByRole('option', { name:'ICO', exact:true }).click();
   await page.locator('#sample').click();
   await page.locator('#notice').filter({ hasText:'Finished: 1 ready, 0 failed.' }).waitFor();
   const ico = await page.locator('.download-image').evaluate(async link => {

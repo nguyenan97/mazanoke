@@ -4,6 +4,7 @@
 - English: [/en/](https://anh-gon-vn.netlify.app/en/)
 - [Dashboard](https://app.netlify.com/projects/anh-gon-vn)
 - Site ID: `190d2047-b9db-4f47-ba7e-519f696cfefd`
+- Review trực tiếp 03/10: production/deploy giữ nguyên; Free $0, còn 224,3/300 credits. Google đã nhận request indexing homepage. [Chi tiết mới nhất](REVIEW-2026-10-03.md).
 - Team `nguyenan6197`, Free được kiểm tra lại ngày 30/09/2026.
 - Build: `node scripts/build-netlify.mjs`; publish: `dist`; Node trên Netlify: 22.
 - Production ngày 30/09/2026: deploy `6abd1f76eaf01a3a10519b18`, version `48ef738bb1d5`, source commit `028bee1`. [Deployment record](https://app.netlify.com/projects/anh-gon-vn/deploys/6abd1f76eaf01a3a10519b18), [CI pass](https://github.com/nguyenan97/mazanoke/actions/runs/36727499058).

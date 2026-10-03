@@ -1,4 +1,21 @@
-# Release checks — 2026-09-27 / review 2026-09-30
+# Release checks — 2026-09-27 / review 2026-10-03
+
+## SEO completion, 2026-10-03
+
+Local application `d7dc21e4217c`: 14/14 tests and all 14 generated routes passed. Docker build/smoke passed. Browser confirmed matching JPG/WebP sample measurements, HEIC 1280 × 854, quality mode with an empty unused target, theme on info pages, service worker update/offline save and no overflow on 14 routes at 360 px. Lighthouse mobile local SEO/Accessibility/Best Practices 100; LCP 2.8 s versus 3.3 s before. Full results, TBT limitation and release status: [SEO audit](SEO-AUDIT-2026-10-03.md).
+
+## Local UI refresh, 2026-10-03
+
+- Application version `c9fe811b6d52` (Choices.js/range refinement after `918e09c2f3dd`), local preview at `http://127.0.0.1:4183/`. Production still serves `48ef738bb1d5`; this UI batch has not been deployed.
+- Applied self-hosted Pico CSS 2.1.1 and selected Lucide SVG icons. Styles and icon module are included in the versioned build and service worker core cache; third-party licenses are published with the build.
+- Browser QA: JPG sample 120,721 bytes / 1200 × 800 within the 200,000-byte target; quality mode and WebP resize 300 × 200 / 4.26 KB; individual download and ZIP actions; keyboard ArrowDown/Tab; matching English task after language switch; clear results and service worker update.
+- Inspected desktop 1280 px, tablet 820 px, and mobile light/dark 360 px. All 14 routes fit the 360 px viewport, and the choose button is 44 px high. No captured console errors in these flows.
+- Explicit offline save reports success for both languages and decoders. Network-disabled operation and physical iPhone/Safari were not repeated for this UI batch.
+- Local screenshots and route measurements: ignored `output/playwright/ui-pico-2026-10-03/`. Automated validation remains `npm run check` (11 tests and 14 production-output routes).
+- Follow-up: removed outlines and focus shadows from settings inputs/selects; number/select focus uses a subtle background. Browser inspection confirmed border `0px`, outline style `none` and shadow `none` on the focused select and number input. Keyboard Tab still works; `npm run check` passed again.
+- Second follow-up: Choices.js 11.2.4 replaces the native popups for mode/unit/format, with rounded local-theme menus and labelled keyboard controls. Vendor files are versioned and included in the offline core; license is preserved.
+- The quality slider now updates track fill on initialization and every input event, with explicit WebKit/Mozilla track/thumb styling. Browser QA passed Home/End at 1%/100%, a mouse drag to 35%, and restoration to 80%; displayed value and fill matched before/after losing focus. Custom dropdown keyboard selection, KB → MB → KB conversion, quality mode with empty hidden target, JPG 1200 × 800 / 120.72 KB and WebP 300 × 200 / 1.96 KB passed. Dropdowns fit mobile 360 px and use matching light/dark backgrounds. No captured console errors.
+- Existing browser regression scripts now select the visible Choices listboxes/options. These script changes have not yet run in CI; local browser QA above and the 11 automated tests / 14-page output checks passed.
 
 ## Automated checks
 
@@ -112,3 +129,7 @@ The first source upload returned a Netlify server 500. A second upload containin
 - SHA-256 and byte-size verification still passes for all 43 candidate files after publish. The prepared `release.json` records its historical local-only preparation; this section records the later publication.
 - Netlify dashboard after publish shows Free **$0**, **224.4 / 300 credits remaining**, **75.6 consumed**, including **5 production deploys / 75 credits**. Current billing period is Sep 26–Oct 25; credits expire Oct 26. Usage can lag by a few minutes. No card, paid upgrade, auto recharge, Functions, Edge Functions or paid analytics was added.
 - Technical release is complete. Google indexing, country/query data, physical Safari/iOS verification and any external community posting retain their previously recorded status; publication does not prove those outcomes.
+
+## Production and Search Console review — 2026-10-03
+
+Production remains `48ef738bb1d5`; no deployment was needed. All 11 local tests and 36 live HTTP/SEO checks passed. Actual JPG and ZIP files were saved and their bytes matched; quality-mode regression, WebP resize, locale switch and 360 px light/dark checks passed. Google accepted the homepage indexing request after a successful Live Test. The 200 KB Live Test passed, but its indexing request was rejected by daily quota. Sitemap is Success with 14 discovered pages, last read Oct 2; Performance remains zero clicks/impressions and Page indexing is still processing. Netlify Free remains $0 with 224.3/300 credits remaining. Full observations, verification limits and next checkpoints: [2026-10-03 review](REVIEW-2026-10-03.md).

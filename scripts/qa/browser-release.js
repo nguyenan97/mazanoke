@@ -3,6 +3,10 @@ async (page) => {
   page.on('pageerror', error => errors.push(error.message));
   page.on('request', request => { if (request.method() !== 'GET') uploads.push(request.url()); });
   const origin = new URL(page.url()).origin;
+  const select = async (label, option) => {
+    await page.getByRole('listbox', { name:label, exact:true }).click();
+    await page.getByRole('option', { name:option, exact:true }).click();
+  };
   await page.goto(origin + '/en/compress-image-to-200kb/');
   const ready = () => page.locator('#notice').filter({ hasText:'Finished: 1 ready, 0 failed.' }).waitFor();
   const inspect = () => page.locator('.download-image').evaluate(async link => {
@@ -20,10 +24,10 @@ async (page) => {
   await (await imageDownload).saveAs('output/playwright/release-sample-' + page.context().browser().browserType().name() + '.jpg');
   const zipDownload = page.waitForEvent('download'); await page.locator('#zip').click();
   await (await zipDownload).saveAs('output/playwright/release-' + page.context().browser().browserType().name() + '.zip');
-  await page.locator('#clear').click(); await page.locator('#target').fill(''); await page.locator('#mode').selectOption('quality');
-  await page.locator('#format').selectOption('image/jpeg'); await page.locator('#sample').click(); await ready();
+  await page.locator('#clear').click(); await page.locator('#target').fill(''); await select('Compression', 'By quality');
+  await select('Output format', 'JPG'); await page.locator('#sample').click(); await ready();
   const quality = await inspect(); if (quality.type !== 'image/jpeg') throw new Error('Hidden target blocked quality mode');
-  await page.locator('#clear').click(); await page.locator('#format').selectOption('image/webp'); await page.locator('#dimensions').fill('300');
+  await page.locator('#clear').click(); await select('Output format', 'WebP'); await page.locator('#dimensions').fill('300');
   await page.locator('#sample').click(); await ready();
   const webp = await inspect();
   if (webp.type !== 'image/webp' || webp.width !== 300 || webp.height !== 200) throw new Error('WebP resize failed');

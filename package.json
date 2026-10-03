@@ -7,9 +7,15 @@
     "start": "node scripts/serve.mjs",
     "test": "node scripts/test.mjs",
     "check": "node scripts/check.mjs",
+    "check:production": "node scripts/verify-production.mjs",
     "release:prepare": "node scripts/prepare-release.mjs"
   },
   "engines": {
     "node": ">=20"
+  },
+  "devDependencies": {
+    "@picocss/pico": "2.1.1",
+    "esbuild": "0.28.2",
+    "sass": "1.105.1"
   }
 }
